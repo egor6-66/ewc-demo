@@ -1,0 +1,7 @@
+@use 'styleUtilities/mixins';
+
+.wrapper {
+  @include mixins.box-size(100%, 100%);
+  @include mixins.flex(center, center);
+  @include mixins.flex(center, center);
+}
