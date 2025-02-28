@@ -1,45 +1,48 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 import { useLogout } from '@/features/auth';
 
 import styles from './styles.module.scss';
-const bc = new BroadcastChannel('map_channel');
 
 const Header = () => {
+    const bc = useRef(new BroadcastChannel('main_channel'));
+
     const [event, setEvent] = useState('');
     const { logout } = useLogout();
 
-    const sendReq = () => {
-        bc.postMessage('This is a test message.');
+    const sendReq = (recipient: 'MAP' | 'CARD') => {
+        bc.current.postMessage(JSON.stringify({ event: 'HELLO', sender: 'HOST', recipient, data: 'EEEEE' }));
     };
 
     useEffect(() => {
         if (event) {
-            console.log('qwdawd');
             setTimeout(() => {
                 setEvent('');
             }, 1000);
         }
-
-        console.log(event);
     }, [event]);
 
     useEffect(() => {
-        bc.onmessage = (e) => {
-            setEvent(`Новое событие от модуля ${e.origin}: ${JSON.stringify(e.data, null, 2)}`);
+        bc.current.onmessage = (e) => {
+            const parse = JSON.parse(e.data);
+
+            if (parse.recipient === 'HOST') {
+                setEvent(`Новое событие от модуля ${parse.sender}: ${JSON.stringify(parse.data, null, 2)}`);
+            }
         };
 
         return () => {
-            bc.close();
+            bc.current.close();
         };
     }, []);
 
     return (
         <div className={styles.wrapper}>
-            <div>
-                <button onClick={sendReq}>send</button>
+            <div className={styles.buttons}>
+                <button onClick={() => sendReq('MAP')}>sendToMap</button>
+                <button onClick={() => sendReq('CARD')}>sendToCard</button>
             </div>
-            <div>{event}</div>
+            <div className={styles.events}>{event}</div>
             <div>
                 <button onClick={logout}>logout</button>
             </div>

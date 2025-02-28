@@ -2,14 +2,12 @@ import { configuration, defaultPaths, IEnvVariables } from '@packages/webpack';
 
 import packageJson from './package.json';
 
-export default (env: IEnvVariables) => {
-    const isDev = env.mode ?? 'development';
-
-    return configuration({
-        port: env.port ?? 3000,
+export default (env: IEnvVariables) =>
+    configuration({
+        port: env.port ?? 3001,
         mode: env.mode ?? 'development',
         paths: {
-            publicPathForNginx: '/',
+            publicPathForNginx: '/card',
             ...defaultPaths(__dirname),
         },
         analyzer: env.analyzer,
@@ -17,13 +15,11 @@ export default (env: IEnvVariables) => {
         moduleFederations: {
             name: packageJson.name,
             filename: 'remoteEntry.js',
-            remotes: {
-                map: isDev ? `map@http://localhost/map/remoteEntry.js` : '',
-                card: isDev ? `card@http://localhost/card/remoteEntry.js` : '',
+            exposes: {
+                './Card': './src/app/index.tsx',
             },
             shared: {
                 ...packageJson.dependencies,
             },
         },
     });
-};

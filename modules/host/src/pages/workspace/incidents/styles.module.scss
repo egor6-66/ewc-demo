@@ -7,7 +7,6 @@
 
   .card {
     @include mixins.box-size(90%, 50%);
-    background-color: antiquewhite;
   }
 
   .map {

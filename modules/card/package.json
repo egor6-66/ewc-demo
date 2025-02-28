@@ -1,5 +1,5 @@
 {
-  "name": "map",
+  "name": "card",
   "version": "1.0.0",
   "scripts": {
     "devserver": "webpack serve --env mode=development",

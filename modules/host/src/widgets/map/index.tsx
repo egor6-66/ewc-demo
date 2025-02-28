@@ -5,7 +5,11 @@ import MapModule from 'map/Map';
 import styles from './styles.module.scss';
 
 const Map = () => {
-    return <div className={styles.wrapper}>{/*<MapModule />*/}</div>;
+    return (
+        <div className={styles.wrapper}>
+            <MapModule />
+        </div>
+    );
 };
 
 export default Map;

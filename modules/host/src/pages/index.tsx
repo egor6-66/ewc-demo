@@ -19,7 +19,7 @@ const Pages = () => {
                     <Route path={'reports'} element={<ReportsPage />}></Route>
                     <Route path={'*'} element={<Navigate to={'/incidents'} />} />
                 </Route>
-                <Route path={'*'} element={<Navigate to={'/workspace'} />} />
+                <Route path={'*'} element={<Navigate to={'/workspace/incidents'} />} />
             </Routes>
         </AnimatePresence>
     );
