@@ -40,11 +40,16 @@ export interface IModuleFederations {
     fallback?: Record<string, string>;
 }
 
-export interface IBuildOptions {
+export interface IDevServer {
     port: number;
+    proxy?: Array<{ prefix: string; target: string; postfix4prefix?: string; ws?: boolean }>;
+}
+
+export interface IBuildOptions {
     paths: IBuildPaths;
     mode: BuildMode;
     version: string;
     analyzer?: boolean;
+    devServer?: IDevServer;
     moduleFederations?: IModuleFederations;
 }

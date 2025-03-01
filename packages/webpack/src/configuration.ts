@@ -25,7 +25,7 @@ function configuration(options: IBuildOptions): webpack.Configuration {
         },
         resolve: resolvers(options),
         devtool: isDev ? 'eval-cheap-module-source-map' : 'source-map',
-        devServer: isDev ? devServer(options) : undefined,
+        devServer: isDev ? devServer(options.devServer) : undefined,
     };
 }
 

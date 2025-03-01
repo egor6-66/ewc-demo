@@ -1,23 +1,8 @@
-import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import { ModuleOptions } from 'webpack';
 
 import { IBuildOptions } from './types';
 
 export function loaders(options: IBuildOptions): ModuleOptions['rules'] {
-    const isDev = options.mode === 'development';
-
-    const modelLoader = {
-        test: /\.(glb|gltf)$/,
-        use: [
-            {
-                loader: 'file-loader',
-                options: {
-                    outputPath: 'assets/models/',
-                },
-            },
-        ],
-    };
-
     const assetLoader = {
         test: /\.(png|jpg|jpeg|gif)$/i,
         type: 'asset/resource',
@@ -48,7 +33,12 @@ export function loaders(options: IBuildOptions): ModuleOptions['rules'] {
     const scssLoader = {
         test: /\.scss$/,
         use: [
-            { loader: 'style-loader' },
+            {
+                loader: 'style-loader',
+                // options: {
+                //     singleton: true,
+                // },
+            },
             {
                 loader: 'css-loader',
                 options: {
@@ -73,5 +63,5 @@ export function loaders(options: IBuildOptions): ModuleOptions['rules'] {
         },
     };
 
-    return [assetLoader, scssLoader, babelLoader, svgrLoader, modelLoader];
+    return [assetLoader, scssLoader, babelLoader, svgrLoader];
 }
