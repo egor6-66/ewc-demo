@@ -9,6 +9,7 @@
     "@pmmmwh/react-refresh-webpack-plugin": "^0.5.11",
     "@svgr/webpack": "^8.1.0",
     "@types/babel__core": "^7.20.3",
+    "@types/dotenv-webpack": "^7.0.8",
     "@types/node": "^20.8.3",
     "@types/webpack": "^5.28.3",
     "@types/webpack-bundle-analyzer": "^4.6.1",
@@ -31,5 +32,8 @@
     "webpack-bundle-analyzer": "^4.9.1",
     "webpack-cli": "^5.1.4",
     "webpack-dev-server": "^4.15.1"
+  },
+  "dependencies": {
+    "dotenv-webpack": "^8.1.0"
   }
 }

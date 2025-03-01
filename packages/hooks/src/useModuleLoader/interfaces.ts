@@ -8,4 +8,5 @@ export interface IMicroservice {
     module: string;
     errorComponent: ReactNode;
     loadingComponent: ReactNode;
+    onError?: () => void;
 }

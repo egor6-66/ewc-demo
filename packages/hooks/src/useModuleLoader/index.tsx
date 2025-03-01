@@ -1,10 +1,10 @@
-import React, { lazy, Suspense, useCallback, useEffect, useState } from 'react';
+import React, { lazy, Suspense, useEffect, useState } from 'react';
 
 import { IMicroservice, IStatus } from './interfaces';
 import loadComponent from './loader';
 
 export const useModuleLoader = (props: IMicroservice) => {
-    const { url, module, scope, errorComponent, loadingComponent } = props;
+    const { url, module, scope, errorComponent, loadingComponent, onError } = props;
 
     const [status, setStatus] = useState<IStatus>('loading');
 
@@ -20,7 +20,10 @@ export const useModuleLoader = (props: IMicroservice) => {
             setStatus('success');
         };
 
-        script.onerror = (): void => setStatus('error');
+        script.onerror = (): void => {
+            onError && onError();
+            setStatus('error');
+        };
 
         document.head.appendChild(script);
 

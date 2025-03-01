@@ -1,6 +1,7 @@
 // import ForkTsCheckerWebpackPlugin from "fork-ts-checker-webpack-plugin";
 import ReactRefreshWebpackPlugin from '@pmmmwh/react-refresh-webpack-plugin';
 import CopyPlugin from 'copy-webpack-plugin';
+import Dotenv from 'dotenv-webpack';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import path from 'path';
@@ -22,6 +23,9 @@ export function plugins({ mode, paths, analyzer, moduleFederations }: IBuildOpti
 
         new DefinePlugin({
             __MODE__: JSON.stringify(mode),
+        }),
+        new Dotenv({
+            path: path.resolve(`.env.${mode}`),
         }),
     ];
 
