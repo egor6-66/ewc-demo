@@ -17,10 +17,7 @@ export default (env: IEnvVariables) => {
         moduleFederations: {
             name: packageJson.name,
             filename: 'remoteEntry.js',
-            remotes: {
-                map: isDev ? `map@http://localhost/map/remoteEntry.js` : '',
-                card: isDev ? `card@http://localhost/card/remoteEntry.js` : '',
-            },
+            remotes: {},
             shared: {
                 ...packageJson.dependencies,
             },

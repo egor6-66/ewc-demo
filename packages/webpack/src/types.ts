@@ -37,6 +37,7 @@ export interface IModuleFederations {
     remotes?: Record<string, string>;
     exposes?: Record<string, string>;
     shared?: (string | ISharedObject)[] | ISharedObject;
+    fallback?: Record<string, string>;
 }
 
 export interface IBuildOptions {
