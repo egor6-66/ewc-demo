@@ -2,25 +2,9 @@ services:
   nginx:
     container_name: nginx
     build:
-      context: ./
+      context: .
+      dockerfile: Dockerfile
       target: prod
-    volumes:
-      - ./config:/config
-      - /etc/letsencrypt:/etc/letsencrypt:ro
-      - /tmp/acme-challenge:/tmp/acme-challenge
     ports:
       - "80:80"
-      - "443:443"
     restart: always
-
-  certbot:
-    container_name: certbot
-    image: certbot/certbot
-    command: sh -c "certbot certonly --webroot -w /tmp/acme-challenge/ -d deathmatch.com.ru --text --agree-tos --email egorraybul@gmail.com --rsa-key-size 4096 --verbose --keep-until-expiring --preferred-challenges=http"
-    entrypoint: ""
-    volumes:
-      - /etc/letsencrypt:/etc/letsencrypt
-      - /tmp/acme-challenge:/tmp/acme-challenge
-    environment:
-      - TERM=xterm
-

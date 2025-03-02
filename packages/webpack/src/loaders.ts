@@ -35,9 +35,9 @@ export function loaders(options: IBuildOptions): ModuleOptions['rules'] {
         use: [
             {
                 loader: 'style-loader',
-                // options: {
-                //     singleton: true,
-                // },
+                options: {
+                    injectType: 'singletonStyleTag',
+                },
             },
             {
                 loader: 'css-loader',

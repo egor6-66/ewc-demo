@@ -10,7 +10,7 @@ import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 
 import { IBuildOptions } from './types';
 
-export function plugins({ mode, paths, analyzer, moduleFederations }: IBuildOptions): Configuration['plugins'] {
+export function plugins({ mode, paths, analyzer, moduleFederations, devServer }: IBuildOptions): Configuration['plugins'] {
     const isDev = mode === 'development';
     const isProd = mode === 'production';
 
@@ -18,7 +18,7 @@ export function plugins({ mode, paths, analyzer, moduleFederations }: IBuildOpti
         new HtmlWebpackPlugin({
             template: paths.html,
             // favicon: path.resolve(paths.public, 'favicon.ico'),
-            publicPath: paths.publicPathForNginx,
+            publicPath: paths.static,
         }),
 
         new DefinePlugin({
@@ -29,15 +29,18 @@ export function plugins({ mode, paths, analyzer, moduleFederations }: IBuildOpti
         }),
     ];
 
-    if (moduleFederations) {
+    if (moduleFederations && !devServer.active) {
         plugins.push(new webpack.container.ModuleFederationPlugin(moduleFederations));
+    }
+
+    if (devServer.active) {
+        plugins.push(new ReactRefreshWebpackPlugin());
     }
 
     if (isDev) {
         plugins.push(new webpack.ProgressPlugin());
         /** Выносит проверку типов в отдельный процесс: не нагружая сборку */
         // plugins.push(new ForkTsCheckerWebpackPlugin())
-        plugins.push(new ReactRefreshWebpackPlugin());
     }
 
     if (isProd) {

@@ -4,11 +4,16 @@ function loadComponent(scope: any, module: any) {
         await __webpack_init_sharing__('default');
         const container = window[scope];
         //@ts-ignore
-        await container.init(__webpack_share_scopes__.default);
-        //@ts-ignore
-        const factory = await window[scope]?.get(module);
+        const shareScopes = __webpack_share_scopes__?.default;
 
-        return factory();
+        if (container && shareScopes) {
+            //@ts-ignore
+            await container.init(shareScopes);
+            //@ts-ignore
+            const factory = await window[scope]?.get(module);
+
+            return factory();
+        }
     };
 }
 

@@ -14,21 +14,23 @@ function useBroadcast() {
     };
 
     const send = <E, P>(event: E, payload: P) => {
-        broadcast.value.postMessage(JSON.stringify({ event, payload }));
+        broadcast.value && broadcast.value.postMessage(JSON.stringify({ event, payload }));
     };
 
     const listener = <E, P>(event: E, cb: (payload: P) => void) => {
-        broadcast.value.onmessage = (e) => {
-            const parse = JSON.parse(e.data);
+        if (broadcast.value) {
+            broadcast.value.onmessage = (e) => {
+                const parse = JSON.parse(e.data);
 
-            if (parse.data.event === event) {
-                cb(parse.payload);
-            }
-        };
+                if (parse.data.event === event) {
+                    cb(parse.payload);
+                }
+            };
+        }
     };
 
     const close = () => {
-        broadcast.value.close();
+        broadcast.value && broadcast.value.close();
     };
 
     return { init, send, listener, close };

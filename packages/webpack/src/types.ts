@@ -4,10 +4,11 @@ export interface IEnvVariables {
     mode?: BuildMode;
     analyzer?: boolean;
     port?: number;
+    devServer?: boolean;
 }
 
 export interface IBuildPaths {
-    publicPathForNginx?: string;
+    static?: string;
     entry: string;
     html: string;
     public: string;
@@ -42,6 +43,7 @@ export interface IModuleFederations {
 
 export interface IDevServer {
     port: number;
+    active: boolean;
     proxy?: Array<{ prefix: string; target: string; postfix4prefix?: string; ws?: boolean }>;
 }
 
@@ -52,4 +54,5 @@ export interface IBuildOptions {
     analyzer?: boolean;
     devServer?: IDevServer;
     moduleFederations?: IModuleFederations;
+    aliases: Record<string, string>;
 }
