@@ -1,3 +1,3 @@
-import('./bootstrap');
+import('./app/bootstrap');
 
 export {};

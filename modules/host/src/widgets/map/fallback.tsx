@@ -1,9 +1,18 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
+
+import { IFallbackProps } from './interfaces';
 
 import styles from './styles.module.scss';
 
-const MapFallback = () => {
-    return <div className={styles.wrapper}>Не удалосб загрузить карту</div>;
+const Fallback = (props: IFallbackProps) => {
+    const { isLoading, isError } = props;
+
+    return (
+        <div className={styles.wrapper}>
+            {isLoading && 'LOADING'}
+            {isError && 'Не удалось загрузить модуль карты города'}
+        </div>
+    );
 };
 
-export default MapFallback;
+export default Fallback;

@@ -2,14 +2,11 @@
 
 .wrapper {
   @include mixins.box-size(100%, 100%);
-  @include mixins.flex-column(center, center);
+  @include mixins.flex-column(space-between, center);
   gap: 12px;
+  padding: 20px;
 
-  .card {
-    @include mixins.box-size(90%, 50%);
-  }
-
-  .map {
-    @include mixins.box-size(90%, 50%);
+  .widget {
+    width: 100%;
   }
 }

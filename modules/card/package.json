@@ -8,7 +8,7 @@
     "typecheck": "tsc"
   },
   "dependencies": {
-    "@packages/shared": "*",
+    "@packages/hooks": "*",
     "@packages/webpack": "*",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

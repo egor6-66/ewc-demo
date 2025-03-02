@@ -1,4 +1,6 @@
-import useBroadcast from './useBroadcast';
-import useModuleLoader from './useModuleLoader';
+import useCustomState from './useCustomState';
 
-export { useBroadcast, useModuleLoader };
+import useModuleLoader from './useModuleLoader';
+import useRPC from './useRPC';
+
+export { useCustomState, useModuleLoader, useRPC };

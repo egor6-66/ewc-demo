@@ -8,12 +8,14 @@
 
   .header{
     @include mixins.box-size(100%, 50px);
+    min-height: 50px;
     border-bottom: 2px solid black;
   }
 
   .tabs{
     @include mixins.box-size(100%, 30px);
     @include mixins.flex(flex-start, center);
+    min-height: 30px;
     gap: 12px;
     padding: 0 20px;
     border-bottom: 2px solid black;
@@ -26,6 +28,7 @@
 
   .footer{
     @include mixins.box-size(100%, 20px);
+    min-height: 20px;
     border-top: 2px solid black;
   }
 }

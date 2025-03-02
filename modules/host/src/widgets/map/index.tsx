@@ -1,23 +1,18 @@
 import React, { memo } from 'react';
 import { useModuleLoader } from '@packages/hooks';
 
+import Fallback from './fallback';
+
 import styles from './styles.module.scss';
 
 const Map = memo(() => {
-    console.log(process.env.MAP_MODULE_URL);
-
     const { Module } = useModuleLoader({
         url: process.env.MAP_MODULE_URL,
         scope: 'map',
         module: './Map',
-        errorComponent: <div>error</div>,
-        loadingComponent: <div>loading</div>,
-        onError: () => {
-            console.log('error card module');
-        },
+        errorComponent: <Fallback isError />,
+        loadingComponent: <Fallback isLoading />,
     });
-
-    console.log(Module());
 
     return (
         <div className={styles.wrapper}>
