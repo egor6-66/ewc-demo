@@ -27,7 +27,7 @@ function useModule<T extends string>(moduleName: T, props?: IProps) {
             bc.postMessage(JSON.stringify({ eventName, data: data || {}, from: moduleName }));
 
             const timer = setTimeout(() => {
-                reject('no answer');
+                reject({ module: target, error: 'no answer' });
                 bc.close();
             }, waitingTimer || 1000);
 
@@ -38,7 +38,7 @@ function useModule<T extends string>(moduleName: T, props?: IProps) {
 
                     if (parse.eventName === eventName) {
                         clearTimeout(timer);
-                        resolve(parse.data);
+                        resolve({ module: target, data: parse.data });
                         bc.close();
                     }
                 },

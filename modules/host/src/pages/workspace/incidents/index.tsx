@@ -1,21 +1,22 @@
-import React, { useEffect } from 'react';
-import { useCustomState, useModule, useRPC, useSharedStorage } from '@packages/hooks';
+import React, { ReactNode, useEffect } from 'react';
+import { useCustomState, useModule } from '@packages/hooks';
 import { Modules } from '@packages/types';
 import { AnimatePresence, motion } from 'framer-motion';
 
-import { Wrapper } from '@/shared/ui';
 import { Card, Map } from '@/widgets';
 
 import styles from './styles.module.scss';
 
 const IncidentsPage = () => {
-    const standaloneWidgets = useCustomState({
-        [Modules.MAP]: true,
-        [Modules.CARD]: true,
+    const widgets = useCustomState<Record<string, { element: ReactNode; standalone: boolean }>>({
+        [Modules.CARD]: { element: <Card />, standalone: true },
+        [Modules.MAP]: { element: <Map />, standalone: true },
     });
 
     const toggleStandalone = (data: { standalone: boolean }, from: Modules) => {
-        standaloneWidgets.set((prev) => ({ ...prev, [from]: data.standalone }));
+        widgets.set((prev) => {
+            return { ...prev, [from]: { ...prev[from], standalone: data.standalone } };
+        });
     };
 
     const module = useModule(Modules.HOST, {
@@ -24,24 +25,28 @@ const IncidentsPage = () => {
         },
     });
 
-    const widgets = [
-        { id: 0, name: Modules.CARD, element: <Card /> },
-        { id: 1, name: Modules.MAP, element: <Map /> },
-    ];
-
     useEffect(() => {
-        module.send({ target: Modules.MAP, eventName: 'checkStandalone', waitingTimer: 500 }).catch((err) => {
-            standaloneWidgets.set((prev) => ({ ...prev, [Modules.MAP]: false }));
-        });
+        Promise.allSettled(Object.keys(widgets.value).map((name) => module.send({ target: name, eventName: 'checkStandalone', waitingTimer: 250 }))).then(
+            (res) => {
+                const updWidgets = { ...widgets.value };
+                res.forEach((i) => {
+                    if (i.status === 'rejected') {
+                        updWidgets[i.reason.module].standalone = false;
+                    }
+                });
+                widgets.set(updWidgets);
+            }
+        );
     }, []);
+    console.log(widgets.value);
 
     return (
         <div className={styles.wrapper}>
             <AnimatePresence initial={false} propagate={false}>
-                {widgets.map(
-                    ({ id, name, element }) =>
-                        !standaloneWidgets.value[name] && (
-                            <motion.div key={id} className={styles.widget} initial={{ height: 0 }} animate={{ height: '100%' }} exit={{ height: 0 }}>
+                {Object.entries(widgets.value).map(
+                    ([name, { element, standalone }]: any) =>
+                        !standalone && (
+                            <motion.div key={name} className={styles.widget} initial={{ height: 0 }} animate={{ height: '100%' }} exit={{ height: 0 }}>
                                 {element}
                             </motion.div>
                         )
