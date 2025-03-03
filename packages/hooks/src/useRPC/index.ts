@@ -1,61 +1,51 @@
-import { useEffect } from 'react';
-import useZustand from 'react-use-zustand';
+import { useEffect, useRef, useState } from 'react';
 
-import { IProps, IStore } from './interfaces';
+import { IOptions } from './interfaces';
 
-const broadcastStore = useZustand<IStore>({
-    keys: ['broadcasts'],
-});
+function useRPC<M>(currentModule: M, props?: IOptions) {
+    const { disabled, events } = props || {};
 
-function useRPC(props: IProps) {
-    const { disabled, events, currentModule } = props || {};
+    const broadCast = useRef(new BroadcastChannel('main_channel'));
+    const [callbacks, setCallbacks] = useState({});
+    // const callbacks = useRef({});
 
-    const broadcasts = broadcastStore.use.broadcasts();
+    const send = <E extends string, P>(target: M, event: E, payload: P, callback?: (data: any) => void) => {
+        const bc = broadCast.current;
 
-    const init = (channelName?: string) => {
-        console.log('init broadcast', currentModule);
-        broadcasts.set({ ...broadcasts.value, [currentModule]: new BroadcastChannel(channelName || 'main_channel') });
-    };
+        if (bc) {
+            bc.postMessage(JSON.stringify({ from: currentModule, event, payload, target }));
 
-    const send = <E, P>(event: E, payload: P, targets: Array<string> = []) => {
-        console.log(currentModule);
-        console.log(broadcasts.value);
-        console.log(broadcasts.value[currentModule]);
-
-        if (broadcasts.value) {
-            if (broadcasts.value[currentModule]) {
-                console.log('send', event, currentModule);
-                broadcasts.value[currentModule].postMessage(JSON.stringify({ from: currentModule, event, payload, targets }));
+            if (callback) {
+                setCallbacks((prev) => ({ ...prev, [`${target}-${event}`]: callback }));
             }
         }
     };
 
     useEffect(() => {
-        if (broadcasts.value && events) {
-            if (broadcasts.value[currentModule]) {
-                broadcasts.value[currentModule].onmessage = (e) => {
-                    const parse = JSON.parse(e.data);
-                    console.log('parse', parse);
+        const bc = broadCast.current;
 
-                    if (!parse.targets.length || parse.targets.includes(currentModule)) {
-                        if (events[parse.event]) {
-                            events[parse.event].event(parse.payload, parse.from);
-                        }
+        if (bc && events) {
+            bc.onmessage = (e) => {
+                const parse = JSON.parse(e.data);
+
+                console.log('wadd', callbacks);
+
+                if (!parse?.targets?.length || parse?.targets?.includes(currentModule)) {
+                    if (events[parse.event] && !disabled) {
+                        const res = events[parse.event](parse.payload, parse.from);
                     }
-                };
-            }
+                }
+            };
         }
-    }, []);
 
-    const close = () => {
-        if (broadcasts.value) {
-            if (broadcasts.value[currentModule]) {
-                broadcasts.value[currentModule].close();
+        return () => {
+            if (broadCast.current) {
+                broadCast.current.close();
             }
-        }
-    };
+        };
+    }, [callbacks]);
 
-    return { init, send, close };
+    return { send };
 }
 
 export default useRPC;

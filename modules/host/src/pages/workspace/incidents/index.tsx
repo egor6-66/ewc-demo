@@ -1,44 +1,40 @@
-import React from 'react';
-import { useCustomState, useRPC } from '@packages/hooks';
-import { AnimatePresence } from 'framer-motion';
-import { motion } from 'framer-motion';
+import React, { useEffect } from 'react';
+import { useCustomState, useModule, useRPC } from '@packages/hooks';
+import { Modules } from '@packages/types';
+import { AnimatePresence, motion } from 'framer-motion';
 
 import { Wrapper } from '@/shared/ui';
 import { Card, Map } from '@/widgets';
-import card from '@/widgets/card';
 
 import styles from './styles.module.scss';
 
 const IncidentsPage = () => {
-    const mapStandAlone = useCustomState(false);
-    const cardStandAlone = useCustomState(false);
-
-    const toggleVisibleWidgets = (data: { standAlone: boolean }, from: string) => {
-        console.log(data, from);
-        if (from === 'MAP') mapStandAlone.set(data.standAlone);
-    };
-
-    useRPC({
-        currentModule: 'HOST',
+    const module = useModule({
         events: {
-            toggleView: { event: toggleVisibleWidgets },
+            test: (data: any) => {
+                console.log('testEvent', data);
+            },
         },
     });
 
+    const toggleStandalone = (data: { standalone: boolean }, from: Modules) => {
+        // standAlone.set((prev) => ({ ...prev, [from]: data.standalone }));
+    };
+
     const widgets = [
-        { id: 0, element: <Card />, visible: !cardStandAlone.value },
-        { id: 1, element: <Map />, visible: !mapStandAlone.value },
+        { id: 0, name: Modules.CARD, element: <Card /> },
+        { id: 1, name: Modules.MAP, element: <Map /> },
     ];
 
     return (
         <Wrapper animationKey={'IncidentsPage'} className={styles.wrapper}>
-            {widgets.map(({ id, element, visible }) => (
+            {widgets.map(({ id, name, element }) => (
                 <AnimatePresence key={id} initial={false}>
-                    {visible && (
-                        <motion.div className={styles.widget} initial={{ height: 0 }} animate={{ height: '100%' }} exit={{ height: 0 }}>
-                            {element}
-                        </motion.div>
-                    )}
+                    {/*{!standAlone.value[name] && (*/}
+                    <motion.div className={styles.widget} initial={{ height: 0 }} animate={{ height: '100%' }} exit={{ height: 0 }}>
+                        {element}
+                    </motion.div>
+                    {/*)}*/}
                 </AnimatePresence>
             ))}
         </Wrapper>

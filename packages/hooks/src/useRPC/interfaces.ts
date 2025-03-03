@@ -1,13 +1,6 @@
-export interface IStore {
-    broadcasts: Record<string, BroadcastChannel>;
-}
+type Event = (data: any, from: string) => any;
 
-interface IEvent {
-    event: (data: object, from: string) => void;
-}
-
-export interface IProps {
-    currentModule: string;
+export interface IOptions {
     disabled?: boolean;
-    events?: Record<string, IEvent>;
+    events?: Record<string, Event>;
 }

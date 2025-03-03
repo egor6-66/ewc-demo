@@ -1,15 +1,17 @@
 import { PropsWithChildren, useEffect } from 'react';
-import { useRPC } from '@packages/hooks';
+import { useModule } from '@packages/hooks';
+import { Modules } from '@packages/types';
 
 const InitProvider = (props: PropsWithChildren) => {
     const { children } = props;
-    const rpc = useRPC({ currentModule: 'MAP' });
+
+    const module = useModule();
 
     useEffect(() => {
-        rpc.init();
+        module.init(Modules.MAP);
 
         return () => {
-            rpc.close();
+            module.close();
         };
     }, []);
 

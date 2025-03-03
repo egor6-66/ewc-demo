@@ -8,6 +8,7 @@
     "typecheck": "tsc"
   },
   "dependencies": {
+    "@packages/types": "*",
     "@packages/hooks": "*",
     "@packages/webpack": "*",
     "react": "^18.2.0",

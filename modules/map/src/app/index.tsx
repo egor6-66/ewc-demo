@@ -1,5 +1,5 @@
 import Pages from '../pages';
-import { AuthProvider, InitProvider, QueryProvider, RouterProvider } from '../proveders';
+import { AuthProvider, InitProvider, QueryProvider } from '../proveders';
 
 const App = () => {
     return (
