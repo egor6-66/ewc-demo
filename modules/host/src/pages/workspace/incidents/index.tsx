@@ -41,11 +41,17 @@ const IncidentsPage = () => {
 
     return (
         <div className={styles.wrapper}>
-            <AnimatePresence initial={false} propagate={false}>
+            <AnimatePresence initial={false}>
                 {Object.entries(widgets.value).map(
-                    ([name, { element, standalone }]: any) =>
+                    ([name, { element, standalone }]: any, index) =>
                         !standalone && (
-                            <motion.div key={name} className={styles.widget} initial={{ height: 0 }} animate={{ height: '100%' }} exit={{ height: 0 }}>
+                            <motion.div
+                                key={name}
+                                className={styles.widget}
+                                // initial={{ height: 0 }}
+                                animate={{ height: '100%' }}
+                                exit={{ height: 0 }}
+                            >
                                 {element}
                             </motion.div>
                         )

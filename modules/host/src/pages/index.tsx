@@ -1,5 +1,5 @@
 import React from 'react';
-import { useRoutes } from 'react-router-dom';
+import { Navigate, useRoutes } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
 
 import IncidentsPage from './workspace/incidents';
@@ -9,6 +9,7 @@ import WorkspacePage from './workspace';
 
 const Pages = () => {
     const routes = useRoutes([
+        { path: '*', element: <Navigate to={'auth'} /> },
         { path: 'auth', element: <AuthPage /> },
         {
             path: 'workspace',
