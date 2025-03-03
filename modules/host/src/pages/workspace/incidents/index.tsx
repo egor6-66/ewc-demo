@@ -52,14 +52,7 @@ const IncidentsPage = () => {
                 {Object.entries(widgets.value).map(
                     ([name, { element, standalone }]: any) =>
                         !standalone && (
-                            <motion.div
-                                initial={{ height: 0 }}
-                                key={name}
-                                className={styles.widget}
-                                // initial={{ height: 0 }}
-                                animate={{ height: '100%' }}
-                                exit={{ height: 0 }}
-                            >
+                            <motion.div initial={{ height: 0 }} key={name} className={styles.widget} animate={{ height: '100%' }} exit={{ height: 0 }}>
                                 {element}
                             </motion.div>
                         )
