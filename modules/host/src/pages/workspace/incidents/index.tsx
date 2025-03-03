@@ -1,13 +1,16 @@
-import React, { ReactNode, useEffect, useState } from 'react';
+import React, { ReactNode, useEffect } from 'react';
 import { useCustomState, useModule } from '@packages/hooks';
 import { Modules } from '@packages/types';
 import { AnimatePresence, motion } from 'framer-motion';
 
+import { Wrapper } from '@/shared/ui';
 import { Card, Map } from '@/widgets';
 
 import styles from './styles.module.scss';
 
 const IncidentsPage = () => {
+    const loading = useCustomState(true);
+
     const widgets = useCustomState<Record<string, { element: ReactNode; standalone: boolean }>>({
         [Modules.CARD]: { element: <Card />, standalone: true },
         [Modules.MAP]: { element: <Map />, standalone: true },
@@ -35,17 +38,22 @@ const IncidentsPage = () => {
                     }
                 });
                 widgets.set(updWidgets);
+                setTimeout(() => {
+                    loading.set(false);
+                }, 500);
             }
         );
     }, []);
 
     return (
         <div className={styles.wrapper}>
+            <AnimatePresence initial={false}>{loading.value && <Wrapper className={styles.loading}>LOADING</Wrapper>}</AnimatePresence>
             <AnimatePresence initial={false}>
                 {Object.entries(widgets.value).map(
-                    ([name, { element, standalone }]: any, index) =>
+                    ([name, { element, standalone }]: any) =>
                         !standalone && (
                             <motion.div
+                                initial={{ height: 0 }}
                                 key={name}
                                 className={styles.widget}
                                 // initial={{ height: 0 }}
