@@ -5,10 +5,10 @@ import { Modules } from '@packages/types';
 const InitProvider = (props: PropsWithChildren) => {
     const { children } = props;
 
-    const module = useModule();
+    const module = useModule(Modules.MAP);
 
     useEffect(() => {
-        module.init(Modules.MAP);
+        module.init();
 
         return () => {
             module.close();

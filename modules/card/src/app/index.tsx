@@ -6,7 +6,7 @@ import styles from './styles.module.scss';
 
 const App = () => {
     const bc = useRef(new BroadcastChannel('main_channel'));
-
+    const bc2 = useRef(new BroadcastChannel('main_channel'));
     const [event, setEvent] = useState('');
 
     const sendReq = () => {
@@ -14,8 +14,9 @@ const App = () => {
     };
 
     useEffect(() => {
-        bc.current.onmessage = (e) => {
+        bc2.current.onmessage = (e) => {
             const parse = JSON.parse(e.data);
+            console.log('parse', parse);
 
             if (parse.recipient === 'CARD') {
                 setEvent(`Новое событие ${parse.event} от модуля ${parse.sender}: ${JSON.stringify(parse.data, null, 2)}`);

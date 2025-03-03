@@ -1,12 +1,14 @@
-type Event = (data: any, from: string) => any;
-
 export interface IStore {
     broadcasts: Record<string, BroadcastChannel>;
-    module: string;
 }
 
 export interface IProps {
-    currentModule: string;
-    disabled?: boolean;
-    events?: Record<string, Event>;
+    events?: Record<string, (data: any, from: string) => any>;
+}
+
+export interface ISendProps<M> {
+    target: M;
+    eventName: string;
+    data?: any;
+    waitingTimer?: number;
 }

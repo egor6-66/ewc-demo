@@ -3,8 +3,8 @@ import React, { lazy, Suspense, useEffect, useState } from 'react';
 import { IMicroservice, IStatus } from './interfaces';
 import loadComponent from './loader';
 
-export const useModuleLoader = (props: IMicroservice) => {
-    const { url, module, scope, errorComponent, loadingComponent, onError } = props;
+export const useModuleLoader = (props: IMicroservice<any>) => {
+    const { url, module, scope, errorComponent, loadingComponent, onError, moduleProps } = props;
 
     const [status, setStatus] = useState<IStatus>('loading');
 
@@ -38,7 +38,7 @@ export const useModuleLoader = (props: IMicroservice) => {
         return (
             <Suspense fallback={loadingComponent}>
                 {status === 'loading' && loadingComponent}
-                {status === 'success' && <Component />}
+                {status === 'success' && <Component {...moduleProps} />}
                 {status === 'error' && errorComponent}
             </Suspense>
         );

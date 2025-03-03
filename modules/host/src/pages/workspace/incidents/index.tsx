@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useCustomState, useModule, useRPC } from '@packages/hooks';
+import { useCustomState, useModule, useRPC, useSharedStorage } from '@packages/hooks';
 import { Modules } from '@packages/types';
 import { AnimatePresence, motion } from 'framer-motion';
 
@@ -9,35 +9,45 @@ import { Card, Map } from '@/widgets';
 import styles from './styles.module.scss';
 
 const IncidentsPage = () => {
-    const module = useModule({
-        events: {
-            test: (data: any) => {
-                console.log('testEvent', data);
-            },
-        },
+    const standaloneWidgets = useCustomState({
+        [Modules.MAP]: true,
+        [Modules.CARD]: true,
     });
 
     const toggleStandalone = (data: { standalone: boolean }, from: Modules) => {
-        // standAlone.set((prev) => ({ ...prev, [from]: data.standalone }));
+        standaloneWidgets.set((prev) => ({ ...prev, [from]: data.standalone }));
     };
+
+    const module = useModule(Modules.HOST, {
+        events: {
+            toggleStandalone: toggleStandalone,
+        },
+    });
 
     const widgets = [
         { id: 0, name: Modules.CARD, element: <Card /> },
         { id: 1, name: Modules.MAP, element: <Map /> },
     ];
 
+    useEffect(() => {
+        module.send({ target: Modules.MAP, eventName: 'checkStandalone', waitingTimer: 500 }).catch((err) => {
+            standaloneWidgets.set((prev) => ({ ...prev, [Modules.MAP]: false }));
+        });
+    }, []);
+
     return (
-        <Wrapper animationKey={'IncidentsPage'} className={styles.wrapper}>
-            {widgets.map(({ id, name, element }) => (
-                <AnimatePresence key={id} initial={false}>
-                    {/*{!standAlone.value[name] && (*/}
-                    <motion.div className={styles.widget} initial={{ height: 0 }} animate={{ height: '100%' }} exit={{ height: 0 }}>
-                        {element}
-                    </motion.div>
-                    {/*)}*/}
-                </AnimatePresence>
-            ))}
-        </Wrapper>
+        <div className={styles.wrapper}>
+            <AnimatePresence initial={false} propagate={false}>
+                {widgets.map(
+                    ({ id, name, element }) =>
+                        !standaloneWidgets.value[name] && (
+                            <motion.div key={id} className={styles.widget} initial={{ height: 0 }} animate={{ height: '100%' }} exit={{ height: 0 }}>
+                                {element}
+                            </motion.div>
+                        )
+                )}
+            </AnimatePresence>
+        </div>
     );
 };
 

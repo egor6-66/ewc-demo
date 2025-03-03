@@ -12,6 +12,9 @@ const Map = memo(() => {
         module: './Map',
         errorComponent: <Fallback isError />,
         loadingComponent: <Fallback isLoading />,
+        moduleProps: {
+            test: 'uraaaaa',
+        },
     });
 
     return (

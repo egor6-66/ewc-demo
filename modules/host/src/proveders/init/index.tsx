@@ -5,10 +5,10 @@ import { Modules } from '@packages/types';
 const InitProvider = (props: PropsWithChildren) => {
     const { children } = props;
 
-    const module = useModule();
+    const module = useModule(Modules.HOST);
 
     useEffect(() => {
-        module.init(Modules.HOST);
+        module.init();
 
         return () => {
             module.close();

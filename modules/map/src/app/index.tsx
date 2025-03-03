@@ -1,7 +1,7 @@
 import Pages from '../pages';
 import { AuthProvider, InitProvider, QueryProvider } from '../proveders';
 
-const App = () => {
+const App = (props: { test: string }) => {
     return (
         <InitProvider>
             <QueryProvider>
