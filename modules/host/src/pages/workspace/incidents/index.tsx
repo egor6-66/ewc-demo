@@ -1,4 +1,4 @@
-import React, { ReactNode, useEffect } from 'react';
+import React, { ReactNode, useEffect, useState } from 'react';
 import { useCustomState, useModule } from '@packages/hooks';
 import { Modules } from '@packages/types';
 import { AnimatePresence, motion } from 'framer-motion';
@@ -14,9 +14,9 @@ const IncidentsPage = () => {
     });
 
     const toggleStandalone = (data: { standalone: boolean }, from: Modules) => {
-        widgets.set((prev) => {
-            return { ...prev, [from]: { ...prev[from], standalone: data.standalone } };
-        });
+        const updWidgets = { ...widgets.value };
+        updWidgets[from].standalone = data.standalone;
+        widgets.set(updWidgets);
     };
 
     const module = useModule(Modules.HOST, {
@@ -38,7 +38,6 @@ const IncidentsPage = () => {
             }
         );
     }, []);
-    console.log(widgets.value);
 
     return (
         <div className={styles.wrapper}>

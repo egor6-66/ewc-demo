@@ -8,7 +8,7 @@ export default (env: IEnvVariables) =>
     configuration({
         mode: env.mode ?? 'development',
         paths: {
-            static: env.devServer ? '/' : '/map',
+            static: env.devServer ? '/' : '/card',
             ...defaultPaths(__dirname),
         },
         devServer: {
