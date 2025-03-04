@@ -2,9 +2,6 @@
 /out/
 /build
 .idea
-.env.development
-.env.production
-.env
 *.tsbuildinfo
 declaretions/next-env.d.ts
 public/sw.js
