@@ -12,3 +12,8 @@ export interface ISendProps<M> {
     data?: any;
     waitingTimer?: number;
 }
+
+export interface IOpenNewWindowProps {
+    moduleUrl: string;
+    delay?: number;
+}

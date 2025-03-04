@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import useZustand from 'react-use-zustand';
 
-import { IProps, ISendProps, IStore } from './interfaces';
+import { IOpenNewWindowProps, IProps, ISendProps, IStore } from './interfaces';
 
 const broadcastStore = useZustand<IStore>({
     keys: ['broadcasts'],
@@ -15,7 +15,7 @@ function useModule<T extends string>(moduleName: T, props?: IProps) {
     };
 
     const init = () => {
-        console.log(`INITIAL ${moduleName} MODULE`);
+        console.log(`%cINITIAL ${moduleName} MODULE`, 'color: green; font-size: 14px;');
         const bc = new BroadcastChannel(`${moduleName}_channel`);
         broadcasts.set((prev) => ({ ...prev, [moduleName]: bc }));
     };
@@ -72,13 +72,26 @@ function useModule<T extends string>(moduleName: T, props?: IProps) {
         }
     }, [broadcasts.value]);
 
+    const windowEvents = {
+        openNewWindow: (props: IOpenNewWindowProps) => {
+            const { moduleUrl, delay = 0 } = props;
+            const params = `scrollbars=no,resizable=no,status=no,location=no,toolbar=no,menubar=no,width=600,height=600,left=0,top=0`;
+            setTimeout(() => {
+                window.open(moduleUrl, '', params);
+            }, delay);
+        },
+        close: () => {
+            window.close();
+        },
+    };
+
     const close = () => {
         if (broadcasts?.value[moduleName]) {
             broadcasts?.value[moduleName].close();
         }
     };
 
-    return { init, close, send, checkStandalone, broadcasts };
+    return { init, close, send, checkStandalone, windowEvents };
 }
 
 export default useModule;
