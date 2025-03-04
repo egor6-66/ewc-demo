@@ -22,7 +22,7 @@ function run() {
             const stat = execSync(`cd ${module} && npm run build:${args.mode}`);
             console.log(stat);
         });
-        const stat = execSync(`npm run build:docker:${args.mode}`);
+        const stat = execSync(`npm run docker`);
         console.log(stat);
     }
 }

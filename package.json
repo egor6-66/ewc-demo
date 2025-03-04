@@ -4,8 +4,7 @@
   "scripts": {
     "demo-stand:dev": "ts-node  ./scripts/demo-stand.ts --mode=dev",
     "demo-stand:prod": "ts-node  ./scripts/demo-stand.ts --mode=prod",
-    "build:docker:dev": "docker compose -f docker-compose.dev.yml  up --build -d",
-    "build:docker:prod": "docker compose -f docker-compose.yml  up --build -d"
+    "docker": "docker compose -f docker-compose.yml  up --build -d"
   },
   "workspaces": [
     "modules/*",
