@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import { useModule } from '@packages/hooks';
 import { Modules } from '@packages/types';
-import process from 'node:process';
 
 import packageJson from '../../../package.json';
 import { Wrapper } from '../../shared/ui';
@@ -22,7 +21,7 @@ const MapPage = () => {
     const toggle = () => {
         const isStandalone = module.checkStandalone();
         handleToggleStandalone(!isStandalone);
-        isStandalone ? module.windowEvents.close() : module.windowEvents.openNewWindow({ moduleUrl: 'http://localhost/map', delay: 250 });
+        isStandalone ? module.windowEvents.close() : module.windowEvents.openNewWindow({ moduleUrl: `${process.env.DOMEN}/map`, delay: 250 });
     };
 
     useEffect(() => {
