@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
-import { useModule } from '@packages/hooks';
-import { Modules } from '@packages/types';
+import { useModule, useStateCustom } from '@packages/hooks';
 
 import packageJson from '../../../package.json';
 import { Wrapper } from '../../shared/ui';
@@ -8,7 +7,11 @@ import { Wrapper } from '../../shared/ui';
 import styles from './styles.module.scss';
 
 const CardPage = () => {
-    const module = useModule(Modules.CARD);
+    const module = useModule('CARD');
+
+    const state = useStateCustom(String(new Date()), {
+        lsKey: 'test',
+    });
 
     const handleToggleStandalone = (value: boolean) => {
         module.send({
@@ -35,6 +38,9 @@ const CardPage = () => {
             <button onClick={toggle}>{module.checkStandalone() ? 'go to host' : 'go to standalone'}</button>
             <div>{`MODULE NAME: ${packageJson.name}`}</div>
             <div>{`MODULE VERSION: ${packageJson.version}`}</div>
+            <div>{state.value}</div>
+            <button onClick={toggle}>set</button>
+            <button onClick={() => state.clear()}>rem</button>
         </Wrapper>
     );
 };

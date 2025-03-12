@@ -1,61 +1,49 @@
-import React, { ReactNode, useEffect } from 'react';
-import { useCustomState, useModule } from '@packages/hooks';
+import React, { useEffect } from 'react';
+import { useModule, useStateCustom } from '@packages/hooks';
 import { Modules } from '@packages/types';
 import { AnimatePresence, motion } from 'framer-motion';
 
-import { Wrapper } from '@/shared/ui';
-import { Card, Map } from '@/widgets';
+import { CardPreview, CardsList, Map } from '@/widgets';
 
 import styles from './styles.module.scss';
 
 const IncidentsPage = () => {
-    const loading = useCustomState(true);
+    const mapStandalone = useStateCustom(true);
 
-    const widgets = useCustomState<Record<string, { element: ReactNode; standalone: boolean }>>({
-        [Modules.CARD]: { element: <Card />, standalone: true },
-        [Modules.MAP]: { element: <Map />, standalone: true },
-    });
-
-    const toggleStandalone = (data: { standalone: boolean }, from: Modules) => {
-        const updWidgets = { ...widgets.value };
-        updWidgets[from].standalone = data.standalone;
-        widgets.set(updWidgets);
+    const toggleMapStandalone = (data: { standalone: boolean }, from: Modules) => {
+        if (from === 'MAP') {
+            mapStandalone.set(data.standalone);
+        }
     };
 
     const module = useModule(Modules.HOST, {
         events: {
-            toggleStandalone: toggleStandalone,
+            toggleStandalone: toggleMapStandalone,
         },
     });
 
     useEffect(() => {
-        Promise.allSettled(Object.keys(widgets.value).map((name) => module.send({ target: name, eventName: 'checkStandalone', waitingTimer: 250 }))).then(
-            (res) => {
-                const updWidgets = { ...widgets.value };
-                res.forEach((i) => {
-                    if (i.status === 'rejected') {
-                        updWidgets[i.reason.module].standalone = false;
-                    }
-                });
-                widgets.set(updWidgets);
-                setTimeout(() => {
-                    loading.set(false);
-                }, 500);
-            }
-        );
+        module.send({ target: Modules.MAP, eventName: 'checkStandalone', waitingTimer: 250 }).catch(() => {
+            toggleMapStandalone({ standalone: false }, Modules.MAP);
+        });
     }, []);
 
     return (
         <div className={styles.wrapper}>
-            <AnimatePresence initial={false}>{loading.value && <Wrapper className={styles.loading}>LOADING</Wrapper>}</AnimatePresence>
+            <button onClick={() => mapStandalone.set((prev) => !prev)}>dwad</button>
+            <div className={styles.cardGroup}>
+                <div className={styles.cardList}>
+                    <CardsList />
+                </div>
+                <div className={styles.cardPreview}>
+                    <CardPreview />
+                </div>
+            </div>
             <AnimatePresence initial={false}>
-                {Object.entries(widgets.value).map(
-                    ([name, { element, standalone }]: any) =>
-                        !standalone && (
-                            <motion.div initial={{ height: 0 }} key={name} className={styles.widget} animate={{ height: '100%' }} exit={{ height: 0 }}>
-                                {element}
-                            </motion.div>
-                        )
+                {!mapStandalone.value && (
+                    <motion.div initial={{ height: 0 }} className={styles.map} animate={{ height: '100%' }} exit={{ height: 0 }}>
+                        <Map />
+                    </motion.div>
                 )}
             </AnimatePresence>
         </div>

@@ -1,3 +1,1 @@
-import Modules from './modules';
-
-export { Modules };
+export * from './modules';

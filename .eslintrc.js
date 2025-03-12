@@ -54,6 +54,7 @@ module.exports = {
     ],
 
     rules: {
+        '@typescript-eslint/ban-types': 0,
         'react/display-name': 0,
         'no-console': 'error',
         'promise/catch-or-return': 0,

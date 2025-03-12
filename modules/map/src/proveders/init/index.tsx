@@ -1,6 +1,5 @@
 import { PropsWithChildren, useEffect } from 'react';
 import { useModule } from '@packages/hooks';
-import { Modules } from '@packages/types';
 
 const InitProvider = (props: PropsWithChildren) => {
     const { children } = props;

@@ -5,19 +5,25 @@
   @include mixins.flex-column(space-between, center);
   gap: 12px;
   padding: 20px;
-  position: relative;
 
-  .widget {
+  .cardGroup {
+    @include mixins.flex(center, center);
     width: 100%;
+    flex: 1;
+    gap: 12px;
+    min-height: 50%;
+
+    .cardList {
+      @include mixins.box-size(100%, 100%);
+    }
+
+    .cardPreview {
+      @include mixins.box-size(100%, 100%);
+      max-width: 300px;
+    }
   }
 
-  .loading{
+  .map {
     @include mixins.box-size(100%, 100%);
-    @include mixins.flex-column(center, center);
-    position: absolute;
-    top: 0;
-    left: 0;
-    background-color: white;
-    z-index: 10;
   }
 }

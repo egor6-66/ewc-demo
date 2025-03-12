@@ -6,9 +6,6 @@
     "paths": {
       "@/*": [
         "./src/*"
-      ],
-      "styleUtilities/*": [
-        "./src/shared/styles/*"
       ]
     }
   },

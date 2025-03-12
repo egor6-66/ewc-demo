@@ -1,13 +1,11 @@
 import Pages from '../pages';
-import { AuthProvider, InitProvider, QueryProvider } from '../proveders';
+import { InitProvider, QueryProvider } from '../proveders';
 
 const App = () => {
     return (
         <InitProvider>
             <QueryProvider>
-                <AuthProvider>
-                    <Pages />
-                </AuthProvider>
+                <Pages />
             </QueryProvider>
         </InitProvider>
     );

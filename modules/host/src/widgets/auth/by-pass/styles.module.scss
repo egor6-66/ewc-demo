@@ -1,9 +1,0 @@
-@use '@packages/styles/src/mixins';
-
-.wrapper{
-  @include mixins.flex(center, center);
-  @include mixins.box-size(350px, 450px);
-  cursor: pointer;
-  border: 2px solid black;
-  border-radius: 20px;
-}

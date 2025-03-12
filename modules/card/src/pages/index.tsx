@@ -1,9 +1,9 @@
 import React from 'react';
 
-import CardPage from './card';
+import MainPage from './main';
 
 const Pages = () => {
-    return <CardPage />;
+    return <MainPage />;
 };
 
 export default Pages;
