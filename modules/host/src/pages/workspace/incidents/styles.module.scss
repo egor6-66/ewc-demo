@@ -5,6 +5,7 @@
   @include mixins.flex-column(space-between, center);
   gap: 12px;
   padding: 20px;
+  background-color: var(--bg-substrate);
 
   .cardGroup {
     @include mixins.flex(center, center);
