@@ -2,12 +2,17 @@ export interface IStore {
     broadcasts: Record<string, BroadcastChannel>;
 }
 
-export interface IProps {
-    events?: Record<string, (data: any, from: string) => any>;
+export interface IEvent<T> {
+    modules: Array<T>;
+    callback: (data: any, from: string) => any;
 }
 
-export interface ISendProps<M> {
-    target: M;
+export interface IProps<T> {
+    events?: Record<string, IEvent<T>>;
+}
+
+export interface ISendProps<T> {
+    target: T;
     eventName: string;
     data?: any;
     waitingTimer?: number;

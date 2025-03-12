@@ -1,30 +1,29 @@
-import React, { useEffect } from 'react';
+import React, { useLayoutEffect } from 'react';
 import { useModule, useStateCustom } from '@packages/hooks';
 import { Modules } from '@packages/types';
-import { AnimatePresence, motion } from 'framer-motion';
+import { AnimatePresence } from '@packages/ui';
 
 import { CardPreview, CardsList, Map } from '@/widgets';
 
 import styles from './styles.module.scss';
 
 const IncidentsPage = () => {
-    const mapStandalone = useStateCustom(true);
+    const mapStandalone = useStateCustom(false);
 
-    const toggleMapStandalone = (data: { standalone: boolean }, from: Modules) => {
-        if (from === 'MAP') {
-            mapStandalone.set(data.standalone);
-        }
-    };
+    const toggleMapStandalone = (data: { standalone: boolean }) => mapStandalone.set(data.standalone);
 
-    const module = useModule(Modules.HOST, {
+    const module = useModule<Modules>(Modules.HOST, {
         events: {
-            toggleStandalone: toggleMapStandalone,
+            toggleStandalone: {
+                modules: [Modules.MAP],
+                callback: toggleMapStandalone,
+            },
         },
     });
 
-    useEffect(() => {
+    useLayoutEffect(() => {
         module.send({ target: Modules.MAP, eventName: 'checkStandalone', waitingTimer: 250 }).catch(() => {
-            toggleMapStandalone({ standalone: false }, Modules.MAP);
+            toggleMapStandalone({ standalone: false });
         });
     }, []);
 
@@ -39,12 +38,8 @@ const IncidentsPage = () => {
                     <CardPreview />
                 </div>
             </div>
-            <AnimatePresence initial={false}>
-                {!mapStandalone.value && (
-                    <motion.div initial={{ height: 0 }} className={styles.map} animate={{ height: '100%' }} exit={{ height: 0 }}>
-                        <Map />
-                    </motion.div>
-                )}
+            <AnimatePresence visible={!mapStandalone.value} className={styles.map} animationVariant={'autoHeight'}>
+                <Map />
             </AnimatePresence>
         </div>
     );

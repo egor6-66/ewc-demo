@@ -1,15 +1,9 @@
 import React from 'react';
 
-import { Wrapper } from '@/shared/ui';
-
 import styles from './styles.module.scss';
 
 const ReportsPage = () => {
-    return (
-        <Wrapper animationKey={'ReportsPage'} className={styles.wrapper}>
-            ReportsPage
-        </Wrapper>
-    );
+    return <div className={styles.wrapper}>ReportsPage</div>;
 };
 
 export default ReportsPage;

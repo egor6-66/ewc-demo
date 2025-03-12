@@ -2,17 +2,12 @@
 
 .wrapper {
   @include mixins.box-size(100%, 100%);
+  @include mixins.text(var(--text-primary), 18px);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 
-  .header{
-    @include mixins.box-size(100%, 50px);
-    min-height: 50px;
-    border-bottom: 2px solid black;
-  }
-
-  .tabs{
+  .tabs {
     @include mixins.box-size(100%, 30px);
     @include mixins.flex(flex-start, center);
     min-height: 30px;
@@ -21,14 +16,8 @@
     border-bottom: 2px solid black;
   }
 
-  .main{
+  .main {
     padding: 20px;
     flex: 1;
-  }
-
-  .footer{
-    @include mixins.box-size(100%, 20px);
-    min-height: 20px;
-    border-top: 2px solid black;
   }
 }

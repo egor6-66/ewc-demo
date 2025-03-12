@@ -1,22 +1,29 @@
 import React from 'react';
-import { Navigate, useRoutes } from 'react-router-dom';
+import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
+import { AnimatePresence } from '@packages/ui';
 
-import IncidentsPage from './workspace/incidents';
-import ReportsPage from './workspace/reports';
+import AuthPage from './auth';
 import WorkspacePage from './workspace';
 
+import styles from './styles.module.scss';
+
 const Pages = () => {
-    return useRoutes([
-        { path: '*', element: <Navigate to={'auth'} /> },
-        {
-            path: 'workspace',
-            element: <WorkspacePage />,
-            children: [
-                { path: 'incidents', element: <IncidentsPage /> },
-                { path: 'reports', element: <ReportsPage /> },
-            ],
-        },
-    ]);
+    const location = useLocation();
+    const animationKey = location.pathname.split('/')[1];
+
+    return (
+        <div className={styles.wrapper}>
+            <div className={styles.info}>info</div>
+            <AnimatePresence className={styles.main} animationKey={animationKey} visible={true}>
+                <Routes location={location} key={animationKey}>
+                    <Route path="*" element={<Navigate to={'auth'} />} />
+                    <Route path="auth*" element={<AuthPage />} />
+                    <Route path="workspace*" element={<WorkspacePage />} />
+                </Routes>
+            </AnimatePresence>
+            <div className={styles.shortInfo}>shortInfo</div>
+        </div>
+    );
 };
 
 export default Pages;

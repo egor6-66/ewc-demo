@@ -17,3 +17,8 @@
   @include flex($justify, $align, $gap);
   flex-direction: column;
 }
+
+@mixin text($color,  $fz: 16, ) {
+  color: $color;
+  font-size: $fz;
+}

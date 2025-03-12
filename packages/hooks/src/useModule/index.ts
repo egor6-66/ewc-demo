@@ -7,7 +7,7 @@ const broadcastStore = useZustand<IStore>({
     keys: ['broadcasts'],
 });
 
-function useModule<T extends string>(moduleName: T, props?: IProps) {
+function useModule<T extends string>(moduleName: T, props?: IProps<T>) {
     const broadcasts = broadcastStore.use.broadcasts();
 
     const checkStandalone = () => {
@@ -59,8 +59,12 @@ function useModule<T extends string>(moduleName: T, props?: IProps) {
                 }
 
                 if (props?.events && props?.events[parse.eventName]) {
-                    const res = props.events[parse.eventName](parse.data, parse.from);
-                    currentBroadcast.postMessage(JSON.stringify({ eventName: parse.eventName, data: res, answer: true }));
+                    const currentEvent = props.events[parse.eventName];
+
+                    if (!currentEvent.modules.length || currentEvent.modules.includes(parse.from)) {
+                        const res = props.events[parse.eventName].callback(parse.data, parse.from);
+                        currentBroadcast.postMessage(JSON.stringify({ eventName: parse.eventName, data: res, answer: true }));
+                    }
                 }
             };
 

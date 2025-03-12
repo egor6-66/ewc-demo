@@ -1,3 +1,5 @@
+import AnimatePresence from './animatePresence';
 import Input from './input';
+import Tabs from './tabs';
 
-export { Input };
+export { AnimatePresence, Input, Tabs };
