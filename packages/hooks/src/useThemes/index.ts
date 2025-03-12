@@ -9,7 +9,9 @@ const defaultTheme = Themes.light;
 
 function useThemes() {
     const theme = useStateCustom<Themes>(defaultTheme, {
-        lsKey: 'theme',
+        storage: {
+            key: 'theme',
+        },
     });
 
     const setTheme = (value: Themes) => {

@@ -62,7 +62,7 @@ function useModule<T extends string>(moduleName: T, props?: IProps<T>) {
                     const currentEvent = props.events[parse.eventName];
 
                     if (!currentEvent.modules.length || currentEvent.modules.includes(parse.from)) {
-                        const res = props.events[parse.eventName].callback(parse.data, parse.from);
+                        const res = props.events[parse.eventName].callback({ module: parse.from, payload: parse.data });
                         currentBroadcast.postMessage(JSON.stringify({ eventName: parse.eventName, data: res, answer: true }));
                     }
                 }

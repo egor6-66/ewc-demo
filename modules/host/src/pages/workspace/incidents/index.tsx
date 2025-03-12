@@ -8,9 +8,14 @@ import { CardPreview, CardsList, Map } from '@/widgets';
 import styles from './styles.module.scss';
 
 const IncidentsPage = () => {
-    const mapStandalone = useStateCustom(false);
+    const mapStandalone = useStateCustom(true, {
+        storage: {
+            key: 'mapStandalone',
+            type: 'sessionStorage',
+        },
+    });
 
-    const toggleMapStandalone = (data: { standalone: boolean }) => mapStandalone.set(data.standalone);
+    const toggleMapStandalone = (data: { payload: { standalone: boolean } }) => mapStandalone.set(data.payload.standalone);
 
     const module = useModule<Modules>(Modules.HOST, {
         events: {
@@ -22,9 +27,12 @@ const IncidentsPage = () => {
     });
 
     useLayoutEffect(() => {
-        module.send({ target: Modules.MAP, eventName: 'checkStandalone', waitingTimer: 250 }).catch(() => {
-            toggleMapStandalone({ standalone: false });
-        });
+        module
+            .send({ target: Modules.MAP, eventName: 'checkStandalone', waitingTimer: 250 })
+            .then(toggleMapStandalone)
+            .catch(() => {
+                toggleMapStandalone({ payload: { standalone: false } });
+            });
     }, []);
 
     return (

@@ -4,7 +4,7 @@ export interface IStore {
 
 export interface IEvent<T> {
     modules: Array<T>;
-    callback: (data: any, from: string) => any;
+    callback: (data: { module: T; payload: any }) => any;
 }
 
 export interface IProps<T> {

@@ -1,3 +1,6 @@
 export interface IOptions {
-    lsKey: string;
+    storage?: {
+        key: string;
+        type?: 'localStorage' | 'sessionStorage';
+    };
 }

@@ -1,17 +1,25 @@
 import { useEffect, useState } from 'react';
 
-import { LocalStorage } from '../_utils';
+import { storageManager } from '../_utils';
 
 import { IOptions } from './interfaces';
 
-function useStateCustom<T>(defaultValue: T, options?: IOptions) {
-    const { lsKey } = options || {};
+const defaultStorage = 'localStorage';
 
-    const getDefaultValue = () => {
-        return lsKey ? LocalStorage.get(lsKey) || defaultValue : defaultValue;
+function useStateCustom<T>(defaultValue: T, options?: IOptions) {
+    const { storage } = options || {};
+
+    const init = () => {
+        if (storage) {
+            const valueInLs = storageManager(storage.type || defaultStorage).get(storage.key);
+
+            return valueInLs !== undefined && valueInLs !== null ? valueInLs : defaultValue;
+        }
+
+        return defaultValue;
     };
 
-    const [state, setState] = useState(getDefaultValue);
+    const [state, setState] = useState(init);
 
     const set = (value: T | ((value: T) => T)) => {
         if (typeof value === 'function') {
@@ -23,13 +31,16 @@ function useStateCustom<T>(defaultValue: T, options?: IOptions) {
     };
 
     const clear = () => {
-        LocalStorage.remove(lsKey);
+        if (storage) {
+            storageManager(storage.type || defaultStorage).remove(storage.key);
+        }
+
         setState(undefined);
     };
 
     useEffect(() => {
-        if (lsKey) {
-            LocalStorage.set(lsKey, state);
+        if (storage) {
+            storageManager(storage.type || defaultStorage).set(storage.key, state);
         }
     }, [state]);
 
