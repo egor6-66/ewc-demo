@@ -1,47 +1,34 @@
 import React, { useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import { useModule, useStateCustom } from '@packages/hooks';
 
-import packageJson from '../../../package.json';
-import { Wrapper } from '../../shared/ui';
+import { ICard } from '@/entities';
+import { useGetCardConfig } from '@/features';
 
 import styles from './styles.module.scss';
 
 const CardPage = () => {
-    const module = useModule('CARD');
+    const params = useParams();
 
-    const state = useStateCustom(String(new Date()), {
-        lsKey: 'test',
-    });
+    const { data: cardConfig } = useGetCardConfig(params.cardType);
 
-    const handleToggleStandalone = (value: boolean) => {
-        module.send({
-            target: 'HOST',
-            eventName: 'toggleStandalone',
-            data: { standalone: value },
-        });
-    };
-
-    const toggle = () => {
-        const isStandalone = module.checkStandalone();
-        handleToggleStandalone(!isStandalone);
-        isStandalone ? module.windowEvents.close() : module.windowEvents.openNewWindow({ moduleUrl: `${process.env.DOMEN}/card`, delay: 250 });
-    };
-
-    useEffect(() => {
-        window.onunload = () => {
-            handleToggleStandalone(false);
-        };
-    }, []);
+    const state = useStateCustom<Array<ICard.IField>>(cardConfig?.fields);
 
     return (
-        <Wrapper animationKey={'authPage'} className={styles.wrapper}>
-            <button onClick={toggle}>{module.checkStandalone() ? 'go to host' : 'go to standalone'}</button>
-            <div>{`MODULE NAME: ${packageJson.name}`}</div>
-            <div>{`MODULE VERSION: ${packageJson.version}`}</div>
-            <div>{state.value}</div>
-            <button onClick={toggle}>set</button>
-            <button onClick={() => state.clear()}>rem</button>
-        </Wrapper>
+        <div className={styles.wrapper}>
+            {state?.value &&
+                Object.entries(state.value)?.map(([key, field]) => {
+                    console.log(field.type);
+
+                    switch (field.type) {
+                        case ICard.Types.INPUT:
+                            return <input />;
+
+                        case ICard.Types.CHECKBOX:
+                            return <input type={'checkbox'} />;
+                    }
+                })}
+        </div>
     );
 };
 

@@ -19,7 +19,7 @@ function useStateCustom<T>(defaultValue: T, options?: IOptions) {
         return defaultValue;
     };
 
-    const [state, setState] = useState(init);
+    const [state, setState] = useState<T>(init);
 
     const set = (value: T | ((value: T) => T)) => {
         if (typeof value === 'function') {
@@ -43,6 +43,10 @@ function useStateCustom<T>(defaultValue: T, options?: IOptions) {
             storageManager(storage.type || defaultStorage).set(storage.key, state);
         }
     }, [state]);
+
+    useEffect(() => {
+        setState(init);
+    }, [defaultValue]);
 
     return { value: state, set, clear };
 }

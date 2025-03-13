@@ -1,0 +1,28 @@
+@use '@packages/styles/src/mixins';
+
+.wrapper {
+  @include mixins.box-size(100%, 100%);
+  @include mixins.text(var(--text-primary), 14px);
+  position: relative;
+
+  .info{
+    @extend %info-position;
+    top: 12px;
+  }
+
+  .main{
+    @include mixins.box-size(100%, 100%);
+    flex: 1;
+  }
+
+  .shortInfo{
+    @extend %info-position;
+    bottom: 12px;
+  }
+}
+
+%info-position {
+  position: absolute;
+  right: 32px;
+  z-index: 10;
+}

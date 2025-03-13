@@ -54,6 +54,8 @@ module.exports = {
     ],
 
     rules: {
+        'no-redeclare': 0,
+        'no-case-declarations': 0,
         '@typescript-eslint/ban-types': 0,
         'react/display-name': 0,
         'no-console': 'error',
