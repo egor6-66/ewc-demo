@@ -1,10 +1,7 @@
-export interface IState {
-    disabled: boolean;
-}
-
 export enum Types {
     CHECKBOX = 'CHECKBOX',
     INPUT = 'INPUT',
+    BUTTON = 'BUTTON',
 }
 
 export interface IAcceptableValues {
@@ -20,6 +17,6 @@ export interface IField {
     value: string;
     placeholder: string;
     acceptableValues: Array<IAcceptableValues>;
-    state?: IState;
-    callback?: () => void;
+    disabled: string;
+    actions?: any;
 }

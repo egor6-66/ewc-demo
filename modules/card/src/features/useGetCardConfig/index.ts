@@ -1,10 +1,13 @@
+import { useIndexDB } from '@packages/hooks';
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
+
+const staleMin = 5;
 
 const useGetCardConfig = (cartType: string) => {
     return useQuery({
         queryKey: ['cardConfig', cartType],
-        staleTime: 1000 * 20,
+        staleTime: 1000 * 60 * staleMin,
         queryFn: async () => {
             const { data } = await axios.get(`http://localhost:5000/cardConfig/${cartType}`, {
                 params: {
@@ -12,7 +15,7 @@ const useGetCardConfig = (cartType: string) => {
                 },
             });
 
-            return data ? JSON.parse(data) : undefined;
+            return data;
         },
     });
 };

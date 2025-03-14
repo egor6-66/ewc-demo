@@ -1,8 +1,7 @@
-import useIsomorphicLayoutEffect from './useIsomorphicLayoutEffect';
+import useIndexDB from './useIndexDB';
 import useModule from './useModule';
 import useModuleLoader from './useModuleLoader';
-import useObservable from './useObservable';
 import useStateCustom from './useStateCustom';
 import useThemes from './useThemes';
 
-export { useIsomorphicLayoutEffect, useModule, useModuleLoader, useObservable, useStateCustom, useThemes };
+export { useIndexDB, useModule, useModuleLoader, useStateCustom, useThemes };

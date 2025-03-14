@@ -1,0 +1,31 @@
+{
+  "version": "1.0.0",
+  "id": "card_01",
+  "description": "CARD 01",
+  "fields": {
+    "street_checkbox": {
+      "displayName": "разрешить доп улицу",
+      "type": "CHECKBOX",
+      "value": false,
+      "placeholder": "",
+      "acceptableValues": []
+    },
+    "street_input": {
+      "type": "INPUT",
+      "displayName": "улица",
+      "value": "",
+      "placeholder": "ведите улицу",
+      "acceptableValues": [
+        {
+          "value": "street1",
+          "displayValue": "лица1"
+        },
+        {
+          "value": "street2",
+          "displayValue": "лица2"
+        }
+      ],
+      "disabled": "link$street_checkbox.value"
+    }
+  }
+}

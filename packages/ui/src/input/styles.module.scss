@@ -1,0 +1,19 @@
+@use '@packages/styles/src/mixins';
+
+.wrapper {
+  @include mixins.flex(center, center);
+  gap: 12px;
+
+  .input{
+    border-radius: 12px;
+    padding: 6px 12px;
+    color: var(--text-primary);
+    background-color: var(--bg-substrate);
+
+
+  }
+  .disabled {
+    background-color: var(--bg-local);
+    pointer-events: none;
+  }
+}

@@ -3,26 +3,28 @@
 .wrapper {
   @include mixins.box-size(100%, 100%);
   @include mixins.text(var(--text-primary), 14px);
+  @include mixins.flex-column();
   position: relative;
+  gap: 12px;
 
-  .info{
-    @extend %info-position;
-    top: 12px;
+  .tabs{
+    @include mixins.box-size(100%, 40px);
+    @include mixins.flex();
+    gap: 12px;
+
+    .tab{
+      @include mixins.box-size(auto, 40px);
+      @include mixins.flex();
+      padding: 12px;
+      background-color: var(--bg-primary);
+      border-radius: 12px;
+      cursor: pointer;
+    }
   }
 
   .main{
     @include mixins.box-size(100%, 100%);
     flex: 1;
+    background-color: var(--bg-primary);
   }
-
-  .shortInfo{
-    @extend %info-position;
-    bottom: 12px;
-  }
-}
-
-%info-position {
-  position: absolute;
-  right: 32px;
-  z-index: 10;
 }
