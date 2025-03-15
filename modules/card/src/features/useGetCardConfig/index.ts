@@ -2,10 +2,11 @@ import { useIndexDB } from '@packages/hooks';
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 
+import { ICard } from '@/entities';
 const staleMin = 5;
 
 const useGetCardConfig = (cartType: string) => {
-    return useQuery({
+    return useQuery<ICard.IData>({
         queryKey: ['cardConfig', cartType],
         staleTime: 1000 * 60 * staleMin,
         queryFn: async () => {

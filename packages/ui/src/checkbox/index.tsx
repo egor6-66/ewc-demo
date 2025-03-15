@@ -10,7 +10,7 @@ const Checkbox = (props: IProps) => {
     return (
         <div className={styles.wrapper}>
             <span>{displayName}</span>
-            <input className={styles.checkbox} {...attrs} type="checkbox" />
+            <input className={styles.checkbox} type="checkbox" {...attrs} />
         </div>
     );
 };

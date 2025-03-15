@@ -4,19 +4,26 @@ export enum Types {
     BUTTON = 'BUTTON',
 }
 
-export interface IAcceptableValues {
-    value: string;
-    displayValue: string;
+export interface IAction {
+    fields: Array<string>;
+    callback: string;
 }
 
 export interface IField {
-    id: string;
+    type: Types;
     name: string;
     displayName: string;
-    type: Types;
     value: string;
     placeholder: string;
-    acceptableValues: Array<IAcceptableValues>;
+    options: any;
     disabled: string;
-    actions?: any;
+    actions: IActions;
 }
+
+export interface IData {
+    version: string;
+    description: string;
+    fields: Fields;
+}
+export type IActions = Array<IAction>;
+export type Fields = Array<IField>;

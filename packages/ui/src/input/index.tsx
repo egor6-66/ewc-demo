@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 import classNames from 'classnames';
 
 import { IProps } from './interfaces';
@@ -6,7 +6,7 @@ import { IProps } from './interfaces';
 import styles from './styles.module.scss';
 
 const Input = (props: IProps) => {
-    const { isLoading, displayName, disabled, ...attrs } = props;
+    const { id, isLoading, displayName, disabled, ...attrs } = props;
 
     const wrapperClasses = classNames({
         [styles.wrapper]: true,
@@ -14,11 +14,10 @@ const Input = (props: IProps) => {
 
     const inputClasses = classNames({
         [styles.input]: true,
-        [styles.disabled]: disabled,
     });
 
     return (
-        <div className={wrapperClasses}>
+        <div id={id} className={wrapperClasses} data-disabled={disabled}>
             <span>{displayName}</span>
             <input className={inputClasses} {...attrs} />
         </div>

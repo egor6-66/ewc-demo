@@ -1,31 +1,46 @@
 {
   "version": "1.0.0",
-  "id": "card_01",
   "description": "CARD 01",
-  "fields": {
-    "street_checkbox": {
-      "displayName": "разрешить доп улицу",
+  "fields": [
+    {
       "type": "CHECKBOX",
-      "value": false,
+      "name": "checkbox1",
+      "displayName": "checkbox1",
+      "value": "false",
       "placeholder": "",
-      "acceptableValues": []
+      "options": [],
+      "disabled": "false"
     },
-    "street_input": {
+    {
+      "type": "CHECKBOX",
+      "name": "checkbox2",
+      "displayName": "checkbox2",
+      "value": "true",
+      "placeholder": "",
+      "options": [],
+      "disabled": "false"
+    },
+    {
       "type": "INPUT",
+      "name": "street_input",
       "displayName": "улица",
       "value": "",
       "placeholder": "ведите улицу",
-      "acceptableValues": [
-        {
-          "value": "street1",
-          "displayValue": "лица1"
-        },
-        {
-          "value": "street2",
-          "displayValue": "лица2"
+      "options": [],
+      "disabled": "true",
+      "actions": {
+        "setDisabled": {
+          "fields": ["checkbox1", "checkbox2"],
+          "callback": "({checkbox1, checkbox2}) => !(checkbox1 && checkbox2)"
         }
-      ],
-      "disabled": "link$street_checkbox.value"
+      },
+      "watchers": [
+        {
+          "fields": ["checkbox1", "checkbox2"],
+          "callback": "({checkbox1, checkbox2}) => !!(checkbox1 && checkbox2)",
+          "currentTarget": "disabled"
+        }
+      ]
     }
-  }
+  ]
 }

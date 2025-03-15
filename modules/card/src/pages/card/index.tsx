@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from 'react';
+import { Control, Controller, FieldValue, SubmitHandler, useForm, useFormContext, UseFormSetValue, UseFormWatch, useWatch } from 'react-hook-form';
 import { useParams } from 'react-router-dom';
 import { useStateCustom } from '@packages/hooks';
 import { Button, Checkbox, Input } from '@packages/ui';
@@ -7,8 +8,6 @@ import { ICard } from '@/entities';
 import { useGetCardConfig } from '@/features';
 
 import styles from './styles.module.scss';
-
-type Fields = Record<string, ICard.IField>;
 
 function parseValue(value: string) {
     if (value?.includes('link$')) {
@@ -27,33 +26,81 @@ function parseValue(value: string) {
     return value;
 }
 
-const CardPage = () => {
-    const params = useParams();
-    const ref = useRef<HTMLInputElement>(null);
-    const { data: cardConfig } = useGetCardConfig(params.cardType);
+const initWatcher = (fields: ICard.Fields, watch: UseFormWatch<any>, setValue: UseFormSetValue<any>) => {
+    const withActions: Record<string, ICard.IActions> = {};
 
-    const state = useStateCustom<Fields>(cardConfig?.fields as Fields);
+    for (const field of fields) {
+        if (field?.actions) {
+            withActions[field.name] = field.actions;
+        }
+    }
 
-    const changeInput = () => {};
+    return watch((state) => {
+        for (const [key, actions] of Object.entries(withActions)) {
+            for (const [action, data] of Object.entries(actions)) {
+                const callback = eval(data.callback);
 
-    const mapper = (elementKey: string, field: ICard.IField) => {
-        const disabled: any = parseValue(field.disabled);
+                if (typeof callback === 'function') {
+                    let el = document.getElementById(key);
 
-        if (disabled) {
-            const propByPath = (object: any, path: any) => path.split('.').reduce((acc: any, cur: any) => acc?.[cur], object);
-            console.log(propByPath(state.value, disabled));
+                    if (action === 'setDisabled') {
+                        el.dataset.disabled = callback(state);
+                    }
+
+                    el = null;
+                }
+            }
         }
 
+        return { ...state, checkbox2: true };
+    });
+};
+
+const CardPage = () => {
+    const params = useParams();
+
+    const { data: cardConfig } = useGetCardConfig(params.cardType);
+
+    const { handleSubmit, control, watch, getValues, setValue } = useForm();
+    console.log('render');
+    useEffect(() => {
+        if (cardConfig?.fields) {
+            const watcher = initWatcher(cardConfig.fields, watch, setValue);
+
+            return () => watcher.unsubscribe();
+        }
+    }, [cardConfig]);
+
+    const onSubmit = (data: any) => console.log(data);
+
+    const mapper = (field: ICard.IField) => {
         switch (field.type) {
             case ICard.Types.INPUT:
-                return <Input placeholder={field.placeholder} displayName={field.displayName} disabled={!!field.disabled} />;
+                return (
+                    <Controller
+                        name={field.name}
+                        control={control}
+                        defaultValue={field.value}
+                        render={(data) => {
+                            return <Input id={field.name} disabled={field.disabled === 'true'} displayName={field.displayName} {...data.field} />;
+                        }}
+                    />
+                );
 
             case ICard.Types.CHECKBOX:
                 return (
-                    <Checkbox
-                        displayName={field.displayName}
-                        value={field.value}
-                        onClick={() => state.set((prev) => ({ ...prev, [elementKey]: { ...field, value: field.value === 'true' ? 'false' : 'true' } }))}
+                    <Controller
+                        name={field.name}
+                        control={control}
+                        defaultValue={field.value === 'true'}
+                        render={(data) => (
+                            <Checkbox
+                                checked={data.field.value}
+                                onChange={(e) => setValue(field.name, e.currentTarget.checked)}
+                                displayName={field.displayName}
+                                {...data.field}
+                            />
+                        )}
                     />
                 );
 
@@ -63,9 +110,11 @@ const CardPage = () => {
     };
 
     return (
-        <div ref={ref} className={styles.wrapper}>
-            {cardConfig?.fields && Object.entries(cardConfig.fields)?.map(([key, field]) => <div key={key}>{mapper(key, field as any)}</div>)}
-        </div>
+        <form onSubmit={handleSubmit(onSubmit)} className={styles.wrapper}>
+            {cardConfig?.fields?.map((field) => (
+                <div key={field.name}>{mapper(field)}</div>
+            ))}
+        </form>
     );
 };
 

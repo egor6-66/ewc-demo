@@ -3,6 +3,13 @@
 .wrapper {
   @include mixins.flex(center, center);
   gap: 12px;
+  transition: background-color 0.25s ;
+  border-radius: 12px;
+  padding: 6px 12px;
+
+  &[data-disabled=true]{
+    background-color: red!important;
+  }
 
   .input{
     border-radius: 12px;
@@ -11,9 +18,5 @@
     background-color: var(--bg-substrate);
 
 
-  }
-  .disabled {
-    background-color: var(--bg-local);
-    pointer-events: none;
   }
 }
