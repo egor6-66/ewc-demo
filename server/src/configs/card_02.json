@@ -1,6 +1,5 @@
 {
   "version": "1.0.0",
-  "id": "card_02",
   "description": "CARD 02",
   "fields": {
     "street_checkbox": {

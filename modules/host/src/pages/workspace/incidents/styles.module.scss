@@ -4,7 +4,6 @@
   @include mixins.box-size(100%, 100%);
   @include mixins.flex-column(space-between, center);
   gap: 12px;
-  padding: 20px;
   background-color: var(--bg-substrate);
   position: relative;
 

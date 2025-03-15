@@ -9,4 +9,5 @@ export interface IProps {
     motion?: MotionProps;
     presence?: AnimatePresenceProps;
     animationVariant?: keyof typeof animationVariant;
+    duration?: number;
 }

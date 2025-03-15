@@ -3,21 +3,16 @@
 .wrapper {
   @include mixins.box-size(100%, 100%);
   @include mixins.text(var(--text-primary), 18px);
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  @include mixins.flex-column;
+  padding: 12px;
 
-  .tabs {
-    @include mixins.box-size(100%, 30px);
-    @include mixins.flex(flex-start, center);
-    min-height: 30px;
-    gap: 12px;
-    padding: 0 20px;
-    border-bottom: 2px solid black;
-  }
+  .mainContainer{
+    @include mixins.flex;
+    @include mixins.box-size(100%, 100%);
 
-  .main {
-    padding: 20px;
-    flex: 1;
+    .main {
+      @include mixins.flex(center, center);
+      @include mixins.box-size(100%, 100%);
+    }
   }
 }

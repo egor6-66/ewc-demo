@@ -1,0 +1,27 @@
+@use '@packages/styles/src/mixins';
+
+.wrapper {
+  @include mixins.flex-column;
+  @include mixins.box-size(100%, 100%);
+  border-radius: 12px;
+  padding: 6px 12px;
+  gap: 12px;
+
+  .report {
+    @include mixins.flex-column;
+    @include mixins.box-size(100%, auto);
+    padding: 6px 12px;
+    min-height: 130px;
+    border-radius: 12px;
+    background-color: var(--bg-substrate);
+    gap: 12px;
+
+    .name {
+
+    }
+
+    .description {
+
+    }
+  }
+}

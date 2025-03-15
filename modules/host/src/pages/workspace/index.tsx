@@ -1,10 +1,7 @@
 import React from 'react';
-import { Navigate, Outlet, Route, Routes, useLocation, useNavigate } from 'react-router-dom';
-import { useThemes } from '@packages/hooks';
-import { Tabs } from '@packages/ui';
+import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
+import { ITab, Tabs } from '@packages/ui';
 import { AnimatePresence } from '@packages/ui';
-
-import Footer from '../../widgets/footer';
 
 import IncidentsPage from './incidents';
 import ReportsPage from './reports';
@@ -14,37 +11,31 @@ import styles from './styles.module.scss';
 const WorkspacePage = () => {
     const navigate = useNavigate();
     const location = useLocation();
-    const animationKey = location.pathname.split('/')[2];
-    const themes = useThemes();
 
-    const changeTabs = (path: string) => {
-        navigate(path);
+    const currentPathSegment = location.pathname.split('/')[2];
+
+    const changeTabs = (tab: ITab.ITab) => {
+        currentPathSegment !== tab.name && navigate(String(tab.name));
     };
 
-    const tabs = [
-        { id: 0, title: 'incidents', path: 'incidents' },
-        { id: 1, title: 'reports', path: 'reports' },
-        { id: 2, title: 'logout', path: '/auth' },
+    const checkActive = (tab: ITab.ITab) => {
+        return currentPathSegment === tab.name;
+    };
+
+    const tabs: ITab.Tabs = [
+        { name: 'incidents', displayName: 'ПРОИСШЕСТВИЯ', checkActive, onClick: changeTabs },
+        { name: 'reports', displayName: 'ОТЧЕТЫ', checkActive, onClick: changeTabs },
     ];
 
     return (
-        <div className={styles.wrapper}>
-            <div className={styles.tabs}>
-                {tabs.map((i) => (
-                    <button key={i.id} onClick={() => changeTabs(i.path)}>
-                        {i.title}
-                    </button>
-                ))}
-                <button onClick={themes.toggleBlackAndWhite}>set theme</button>
-            </div>
-
-            <AnimatePresence animationKey={animationKey} visible={true} className={styles.main}>
-                <Routes location={location} key={animationKey}>
+        <Tabs id={'WorkspacePageTabs'} tabs={tabs} classes={{ wrapper: styles.wrapper, children: styles.mainContainer }}>
+            <AnimatePresence animationKey={currentPathSegment} visible={true} className={styles.main}>
+                <Routes location={location} key={currentPathSegment}>
                     <Route path="incidents" element={<IncidentsPage />} />
-                    <Route path="reports" element={<ReportsPage />} />
+                    <Route path="reports*" element={<ReportsPage />} />
                 </Routes>
             </AnimatePresence>
-        </div>
+        </Tabs>
     );
 };
 

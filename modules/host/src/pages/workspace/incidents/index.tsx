@@ -37,7 +37,6 @@ const IncidentsPage = () => {
 
     return (
         <div className={styles.wrapper}>
-            <button onClick={() => mapStandalone.set((prev) => !prev)}>dwad</button>
             <div className={styles.cardGroup}>
                 <div className={styles.cardList}>
                     <CardsList />
