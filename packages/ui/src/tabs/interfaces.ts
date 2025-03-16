@@ -12,6 +12,7 @@ export interface ITab {
 export interface IProps {
     id?: string;
     tabs: Tabs;
+    childAnimationKey?: string;
     classes?: {
         wrapper?: string;
         tabs?: string;

@@ -5,7 +5,7 @@
   @include mixins.flex-column(center, center);
   gap: 12px;
 
-  .tabs{
+  .tabs {
     @include mixins.box-size(100%, auto);
     @include mixins.flex(flex-start, center);
     background-color: var(--bg-primary);
@@ -13,7 +13,7 @@
     border-radius: 12px;
     gap: 12px;
 
-    .tab{
+    .tab {
       background-color: var(--bg-substrate);;
       border-radius: 12px;
       padding: 6px 12px;
@@ -21,15 +21,11 @@
     }
   }
 
-  .reportsContainer{
+  .reports {
     @include mixins.box-size(100%, auto);
     @include mixins.flex;
     border-radius: 12px;
     background-color: var(--bg-primary);
     flex: 1;
-
-    .reports{
-      @include mixins.box-size(100%, 100%);
-    }
   }
 }

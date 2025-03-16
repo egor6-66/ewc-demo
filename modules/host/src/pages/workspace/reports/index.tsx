@@ -34,12 +34,10 @@ const ReportsPage = () => {
     }, [parseTabs]);
 
     return (
-        <Tabs id={'ReportsPageTabs'} tabs={parseTabs} classes={{ wrapper: styles.wrapper, children: styles.reportsContainer }}>
-            <AnimatePresence className={styles.reports} animationKey={currentPathSegment} visible={true} duration={0.15}>
-                <Routes location={location} key={currentPathSegment}>
-                    <Route path=":tabReportId" element={<Reports reports={reportsConfig?.tabs.find((i) => i.name === currentPathSegment)?.reports} />} />
-                </Routes>
-            </AnimatePresence>
+        <Tabs id={'ReportsPage'} childAnimationKey={currentPathSegment} tabs={parseTabs} classes={{ wrapper: styles.wrapper, children: styles.reports }}>
+            <Routes location={location} key={currentPathSegment}>
+                <Route path="/:id" element={<Reports reports={reportsConfig?.tabs.find((i) => i.name === currentPathSegment)?.reports} />} />
+            </Routes>
         </Tabs>
     );
 };

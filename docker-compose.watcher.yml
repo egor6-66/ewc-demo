@@ -1,0 +1,24 @@
+services:
+  nginx:
+    container_name: nginx
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: dev
+    develop:
+      watch:
+        - action: sync
+          path: ./modules/host/builds/development
+          target: /modules/host
+
+        - action: sync
+          path: ./modules/map/builds/development
+          target: /modules/map
+
+        - action: sync
+          path: ./modules/card/builds/development
+          target: /modules/card
+
+    ports:
+      - "443:443"
+    restart: always

@@ -13,6 +13,7 @@ const Pages = () => {
 
     return (
         <div className={styles.wrapper}>
+            ddd
             <div className={styles.info}>info</div>
             <AnimatePresence className={styles.main} animationKey={animationKey} visible={true}>
                 <Routes location={location} key={animationKey}>

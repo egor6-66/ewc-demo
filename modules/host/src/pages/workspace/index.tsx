@@ -28,13 +28,11 @@ const WorkspacePage = () => {
     ];
 
     return (
-        <Tabs id={'WorkspacePageTabs'} tabs={tabs} classes={{ wrapper: styles.wrapper, children: styles.mainContainer }}>
-            <AnimatePresence animationKey={currentPathSegment} visible={true} className={styles.main}>
-                <Routes location={location} key={currentPathSegment}>
-                    <Route path="incidents" element={<IncidentsPage />} />
-                    <Route path="reports*" element={<ReportsPage />} />
-                </Routes>
-            </AnimatePresence>
+        <Tabs id={'WorkspacePage'} childAnimationKey={currentPathSegment} tabs={tabs} classes={{ wrapper: styles.wrapper, children: styles.main }}>
+            <Routes location={location} key={currentPathSegment}>
+                <Route path="incidents*" element={<IncidentsPage />} />
+                <Route path="reports*" element={<ReportsPage />} />
+            </Routes>
         </Tabs>
     );
 };
