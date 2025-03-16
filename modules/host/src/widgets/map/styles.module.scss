@@ -5,4 +5,5 @@
   @include mixins.box-size(100%, 100%);
   border-radius: 12px;
   background-color: var(--bg-primary);
+  overflow: hidden;
 }
