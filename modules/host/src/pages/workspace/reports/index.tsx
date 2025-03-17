@@ -1,6 +1,6 @@
-import React, { useEffect, useLayoutEffect, useMemo } from 'react';
-import { Route, Routes, useLocation, useNavigate, useParams } from 'react-router-dom';
-import { AnimatePresence, ITab, Tabs } from '@packages/ui';
+import React, { useEffect, useMemo } from 'react';
+import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
+import { ITab, Tabs } from '@packages/ui';
 
 import { useGetReports } from '@/features/reports';
 import { Reports } from '@/widgets';
@@ -34,7 +34,7 @@ const ReportsPage = () => {
     }, [parseTabs]);
 
     return (
-        <Tabs id={'ReportsPage'} childAnimationKey={currentPathSegment} tabs={parseTabs} classes={{ wrapper: styles.wrapper, children: styles.reports }}>
+        <Tabs childAnimationKey={currentPathSegment} tabs={parseTabs} classes={{ wrapper: styles.wrapper, children: styles.reports }}>
             <Routes location={location} key={currentPathSegment}>
                 <Route path="/:id" element={<Reports reports={reportsConfig?.tabs.find((i) => i.name === currentPathSegment)?.reports} />} />
             </Routes>

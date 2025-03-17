@@ -1,0 +1,30 @@
+{
+  "version": "1.0.0",
+  "description": "CARD 112",
+  "groups": [
+    {
+      "name": "group_1",
+      "displayName": "группа 1",
+      "fields": [
+        {
+          "type": "CHECKBOX",
+          "name": "checkbox1",
+          "displayName": "checkbox1",
+          "value": "false",
+          "placeholder": "",
+          "options": [],
+          "disabled": "false"
+        },
+        {
+          "type": "CHECKBOX",
+          "name": "checkbox2",
+          "displayName": "checkbox2",
+          "value": "true",
+          "placeholder": "",
+          "options": [],
+          "disabled": "false"
+        }
+      ]
+    }
+  ]
+}

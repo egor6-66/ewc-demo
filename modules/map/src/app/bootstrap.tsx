@@ -1,7 +1,7 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 
-import { StandAlone } from './index';
+import { Standalone } from './index';
 
 import '@packages/styles/src/index.scss';
 
@@ -12,4 +12,4 @@ if (!root) {
 }
 
 const container = createRoot(root);
-container.render(<StandAlone />);
+container.render(<Standalone />);

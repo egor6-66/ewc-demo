@@ -1,9 +1,7 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 
-import { RouterProvider } from '../proveders';
-
-import App from './index';
+import { Standalone } from './index';
 
 import '@packages/styles/src/index.scss';
 
@@ -14,8 +12,4 @@ if (!root) {
 }
 
 const container = createRoot(root);
-container.render(
-    <RouterProvider>
-        <App />
-    </RouterProvider>
-);
+container.render(<Standalone />);

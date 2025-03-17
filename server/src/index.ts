@@ -15,7 +15,7 @@ function Bootstrap() {
 
     app.get('/cardConfig/:type', async (req: any, res: any) => {
         const params = req.params;
-        res.send(getConfig(path.join(pathToConfigsDir, `card_${params.type}.json`)));
+        res.send(getConfig(path.join(pathToConfigsDir, `card.json`)));
     });
 
     app.get('/reportsConfig', async (req: any, res: any) => {

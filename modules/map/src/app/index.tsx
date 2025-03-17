@@ -9,7 +9,7 @@ const App = () => {
     );
 };
 
-export const StandAlone = () => {
+export const Standalone = () => {
     return (
         <InitProvider>
             <QueryProvider>

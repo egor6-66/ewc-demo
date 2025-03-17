@@ -1,6 +1,5 @@
-import React, { PropsWithChildren, useEffect } from 'react';
+import React, { PropsWithChildren } from 'react';
 import classNames from 'classnames';
-import { motion } from 'framer-motion';
 
 import AnimatePresence from '../animatePresence';
 
@@ -9,8 +8,7 @@ import { IProps } from './interfaces';
 import styles from './styles.module.scss';
 
 const Tabs = (props: PropsWithChildren<IProps>) => {
-    const { id, tabs, children, childAnimationKey, classes } = props;
-    console.log('render');
+    const { tabs, children, childAnimationKey, classes } = props;
 
     return (
         <div className={classNames(styles.wrapper, classes?.wrapper)}>
@@ -19,9 +17,12 @@ const Tabs = (props: PropsWithChildren<IProps>) => {
                     const isActive = tab?.checkActive(tab);
 
                     return (
-                        <div key={tab.name} className={classNames(styles.tab, classes?.tab)} onClick={() => tab.onClick(tab)}>
+                        <div
+                            key={tab.name}
+                            className={classNames(styles.tab, classes?.tab, isActive ? styles.tab_active : '')}
+                            onClick={() => tab.onClick(tab)}
+                        >
                             {tab.displayName}
-                            {/*{isActive && <motion.div className={styles.line} layoutId={id} />}*/}
                         </div>
                     );
                 })}

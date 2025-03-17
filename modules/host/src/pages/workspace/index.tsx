@@ -1,7 +1,6 @@
 import React from 'react';
 import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 import { ITab, Tabs } from '@packages/ui';
-import { AnimatePresence } from '@packages/ui';
 
 import IncidentsPage from './incidents';
 import ReportsPage from './reports';
@@ -25,10 +24,11 @@ const WorkspacePage = () => {
     const tabs: ITab.Tabs = [
         { name: 'incidents', displayName: 'ПРОИСШЕСТВИЯ', checkActive, onClick: changeTabs },
         { name: 'reports', displayName: 'ОТЧЕТЫ', checkActive, onClick: changeTabs },
+        { name: '/auth', displayName: 'LOGOUT', checkActive, onClick: changeTabs },
     ];
 
     return (
-        <Tabs id={'WorkspacePage'} childAnimationKey={currentPathSegment} tabs={tabs} classes={{ wrapper: styles.wrapper, children: styles.main }}>
+        <Tabs childAnimationKey={currentPathSegment} tabs={tabs} classes={{ wrapper: styles.wrapper, children: styles.main }}>
             <Routes location={location} key={currentPathSegment}>
                 <Route path="incidents*" element={<IncidentsPage />} />
                 <Route path="reports*" element={<ReportsPage />} />
