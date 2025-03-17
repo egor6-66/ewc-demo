@@ -5,23 +5,10 @@
   @include mixins.flex-column(center, center);
   gap: 12px;
 
-  .tabs {
-    @include mixins.box-size(100%, auto);
-    @include mixins.flex(flex-start, center);
-    background-color: var(--bg-primary);
-    padding: 6px 12px;
-    border-radius: 12px;
-    gap: 12px;
-
-    .tab {
-      background-color: var(--bg-substrate);;
-      border-radius: 12px;
-      padding: 6px 12px;
-      cursor: pointer;
-    }
+  .navigations {
   }
 
-  .reports {
+  .content {
     @include mixins.box-size(100%, auto);
     @include mixins.flex;
     border-radius: 12px;

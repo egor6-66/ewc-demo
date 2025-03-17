@@ -5,7 +5,11 @@
   @include mixins.text(var(--text-primary), 18px);
   @include mixins.flex-column;
 
-  .main {
+  .navigations{
+
+  }
+
+  .content {
     @include mixins.flex(center, center);
     @include mixins.box-size(100%, 100%);
   }

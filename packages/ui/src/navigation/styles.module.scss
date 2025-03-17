@@ -1,0 +1,26 @@
+@use '@packages/styles/src/mixins';
+
+.wrapper {
+  @include mixins.box-size(100%, 40px);
+
+  .items {
+    @include mixins.box-size(100%, 100%);
+    @include mixins.text(var(--text-primary), 18px);
+    @include mixins.flex;
+    gap: 12px;
+
+    .item{
+      cursor: pointer;
+      transition: color 0.5s;
+
+      &_active{
+        color: var(--blue-primary);
+      }
+    }
+  }
+  .line {
+    background-color: var(--blue-primary);
+    @include mixins.box-size(100%, 2px);
+    margin-top: 4px;
+  }
+}
