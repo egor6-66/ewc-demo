@@ -38,7 +38,7 @@ function useModule<T extends string>(moduleName: T, props?: IProps<T>) {
 
                     if (parse.eventName === eventName) {
                         clearTimeout(timer);
-                        resolve({ module: target, data: parse.data });
+                        resolve({ module: target, payload: parse.data });
                         bc.close();
                     }
                 },

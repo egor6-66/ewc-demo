@@ -4,7 +4,7 @@
   @include mixins.box-size(100%, 100%);
   @include mixins.text(var(--text-primary), 14px);
   position: relative;
-
+  padding: 12px;
   .info{
     @extend %info-position;
     top: 12px;

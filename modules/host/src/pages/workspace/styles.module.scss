@@ -4,7 +4,6 @@
   @include mixins.box-size(100%, 100%);
   @include mixins.text(var(--text-primary), 18px);
   @include mixins.flex-column;
-  padding: 12px;
 
   .main {
     @include mixins.flex(center, center);

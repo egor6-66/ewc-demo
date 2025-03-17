@@ -1,9 +1,17 @@
 import React from 'react';
 
+import { useToggleStandalone } from '@/features';
+
 import styles from './styles.module.scss';
 
 const Tools = () => {
-    return <div className={styles.wrapper}>Tools</div>;
+    const { toggle } = useToggleStandalone();
+
+    return (
+        <div className={styles.wrapper}>
+            <button onClick={toggle}>toggle</button>
+        </div>
+    );
 };
 
 export default Tools;

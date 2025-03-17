@@ -7,33 +7,34 @@
   background-color: var(--bg-substrate);
   position: relative;
 
-  .loading {
-    @include mixins.box-size(100%, 100%);
-    @include mixins.flex(center, center);
-    background-color: var(--bg-substrate);
-    position: absolute;
-    top: 0;
-    left: 0;
+.header{
+  @include mixins.box-size(100%, 40px);
+  @include mixins.flex(space-between, center);
+
+  .block{
+    @include mixins.flex;
+    gap: 18px;
   }
+}
 
   .cardGroup {
     @include mixins.flex(center, center);
     width: 100%;
     flex: 1;
     gap: 12px;
-    min-height: 50%;
+    min-height: 70%;
 
     .cardList {
-      @include mixins.box-size(100%, 100%);
+      @include mixins.box-size(80%, 100%);
     }
 
     .cardPreview {
-      @include mixins.box-size(100%, 100%);
-      max-width: 300px;
+      @include mixins.box-size(20%, 100%);
+      min-width: 350px;
     }
   }
 
   .map {
-    @include mixins.box-size(100%, 100%);
+    @include mixins.box-size(100%, 30%);
   }
 }
