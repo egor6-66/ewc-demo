@@ -6,7 +6,8 @@
   .items {
     @include mixins.box-size(100%, 100%);
     @include mixins.text(var(--text-primary), 18px);
-    @include mixins.flex;
+    @include mixins.flex(flex-start, center);
+    position: relative;
     gap: 12px;
 
     .item{
@@ -18,9 +19,12 @@
       }
     }
   }
+
   .line {
     background-color: var(--blue-primary);
-    @include mixins.box-size(100%, 2px);
+    height: 2px;
     margin-top: 4px;
+    position: absolute;
+    bottom: 4px;
   }
 }

@@ -18,8 +18,8 @@ const Pages = () => {
             <AnimatePresence className={styles.main} animationKey={animationKey} visible={true}>
                 <Routes location={location} key={animationKey}>
                     <Route path="*" element={<Navigate to={'auth'} />} />
-                    <Route path="auth*" element={<AuthPage />} />
-                    <Route path="workspace*" element={<WorkspacePage />} />
+                    <Route path="auth/*" element={<AuthPage />} />
+                    <Route path="workspace/*" element={<WorkspacePage />} />
                     <Route path="card/:cardId" element={<CardPage />} />
                 </Routes>
             </AnimatePresence>

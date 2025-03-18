@@ -10,7 +10,7 @@ const Reports = (props: IProps) => {
     return (
         <div className={styles.wrapper}>
             {reports?.map((report) => (
-                <div key={report.displayName} className={styles.report}>
+                <div key={report.name} className={styles.report}>
                     <div className={styles.name}>{report.displayName}</div>
                     <div className={styles.description}>{report.description}</div>
                 </div>

@@ -1,6 +1,6 @@
-import React, { useEffect, useMemo } from 'react';
+import React, { useEffect } from 'react';
 import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
-import { AnimatePresence, ITab, Navigation, Tabs } from '@packages/ui';
+import { AnimatePresence, Navigation } from '@packages/ui';
 
 import { useGetReports } from '@/features/reports';
 import { Reports } from '@/widgets';
@@ -15,29 +15,15 @@ const ReportsPage = () => {
 
     const currentPathSegment = location.pathname.split('/')[3];
 
-    const parseTabs = useMemo<ITab.Tabs>(() => {
-        if (reportsConfig) {
-            return reportsConfig.tabs.map((tab) => ({
-                ...tab,
-                onClick: () => currentPathSegment !== tab.name && navigate(String(tab.name)),
-                checkActive: () => currentPathSegment === tab.name,
-            }));
-        }
-
-        return [];
-    }, [reportsConfig, currentPathSegment]);
-
     useEffect(() => {
-        if (parseTabs?.length && !currentPathSegment) {
-            navigate(parseTabs[0].name);
+        if (reportsConfig?.tabs?.length && !currentPathSegment) {
+            navigate(reportsConfig.tabs[0].name);
         }
-    }, [parseTabs]);
+    }, [reportsConfig?.tabs]);
 
     return (
         <div className={styles.wrapper}>
-            {/*<div className={styles.navigations}>*/}
-            <Navigation id={'ReportsPage'} items={parseTabs} />
-            {/*</div>*/}
+            <Navigation id={'ReportsPage'} items={reportsConfig?.tabs} />
             <AnimatePresence visible={true} className={styles.content} animationKey={currentPathSegment}>
                 <Routes location={location} key={currentPathSegment}>
                     <Route path="/:id" element={<Reports reports={reportsConfig?.tabs.find((i) => i.name === currentPathSegment)?.reports} />} />

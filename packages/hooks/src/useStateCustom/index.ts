@@ -44,10 +44,6 @@ function useStateCustom<T>(defaultValue: T, options?: IOptions) {
         }
     }, [state]);
 
-    useEffect(() => {
-        setState(init);
-    }, [defaultValue]);
-
     return { value: state, set, clear };
 }
 
