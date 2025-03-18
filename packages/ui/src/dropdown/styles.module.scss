@@ -1,0 +1,25 @@
+@use '@packages/styles/src/mixins';
+
+.wrapper {
+  @include mixins.flex-column;
+  cursor: pointer;
+
+  .trigger{
+  }
+
+  .dropdownContainer{
+    position: relative;
+
+    .dropdown{
+      position: absolute;
+      top: 8px;
+      right: -12px;
+      padding: 6px 12px;
+
+      .item{
+        background-color: #0D4CD3;
+      }
+    }
+  }
+
+}

@@ -30,7 +30,7 @@ const IncidentsPage = () => {
                     <CardPreview />
                 </div>
             </div>
-            <AnimatePresence visible={!mapStandalone.value} className={styles.map} animationVariant={'autoHeight'}>
+            <AnimatePresence visible={!mapStandalone.value} className={styles.map} animationVariant={'fullHeight'}>
                 <Map />
             </AnimatePresence>
         </div>

@@ -4,9 +4,14 @@ const animations = {
         animate: { opacity: 1 },
         exit: { opacity: 0 },
     },
-    autoHeight: {
+    fullHeight: {
         initial: { height: 0 },
         animate: { height: '100%' },
+        exit: { height: 0 },
+    },
+    autoHeight: {
+        initial: { height: 0 },
+        animate: { height: 'auto' },
         exit: { height: 0 },
     },
 };

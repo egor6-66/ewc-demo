@@ -1,0 +1,16 @@
+@use '@packages/styles/src/mixins';
+
+.wrapper {
+  @include mixins.flex;
+  gap: 12px;
+  cursor: pointer;
+
+  .operatorName{
+
+  }
+
+  .dropdown{
+
+  }
+
+}

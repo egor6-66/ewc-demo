@@ -1,5 +1,6 @@
 import React from 'react';
 import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
+import { AppState } from '@packages/components';
 import { AnimatePresence } from '@packages/ui';
 
 import AuthPage from './auth';
@@ -14,7 +15,9 @@ const Pages = () => {
 
     return (
         <div className={styles.wrapper}>
-            <div className={styles.info}>info</div>
+            <div className={styles.info}>
+                <AppState operatorName={'112 Санкт-Петербург'} />
+            </div>
             <AnimatePresence className={styles.main} animationKey={animationKey} visible={true}>
                 <Routes location={location} key={animationKey}>
                     <Route path="*" element={<Navigate to={'auth'} />} />
@@ -23,7 +26,6 @@ const Pages = () => {
                     <Route path="card/:cardId" element={<CardPage />} />
                 </Routes>
             </AnimatePresence>
-            <div className={styles.shortInfo}>shortInfo</div>
         </div>
     );
 };
