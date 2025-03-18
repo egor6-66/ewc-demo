@@ -1,6 +1,6 @@
-import React, { useLayoutEffect } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useModule, useStateCustom } from '@packages/hooks';
+import { useStandalone } from '@packages/hooks';
 import { Modules } from '@packages/types';
 import { AnimatePresence, Button } from '@packages/ui';
 
@@ -11,34 +11,7 @@ import styles from './styles.module.scss';
 const IncidentsPage = () => {
     const navigate = useNavigate();
 
-    const mapStandalone = useStateCustom(true, {
-        storage: {
-            key: 'mapStandalone',
-            type: 'sessionStorage',
-        },
-    });
-
-    const toggleMapStandalone = (data: { payload: { standalone: boolean } }) => {
-        mapStandalone.set(data.payload.standalone);
-    };
-
-    const module = useModule<Modules>(Modules.HOST, {
-        events: {
-            toggleStandalone: {
-                modules: [Modules.MAP],
-                callback: toggleMapStandalone,
-            },
-        },
-    });
-
-    useLayoutEffect(() => {
-        module
-            .send({ target: Modules.MAP, eventName: 'checkStandalone', waitingTimer: 250 })
-            .then(toggleMapStandalone)
-            .catch(() => {
-                toggleMapStandalone({ payload: { standalone: false } });
-            });
-    }, []);
+    const mapStandalone = useStandalone({ currentModule: Modules.HOST, targetModule: Modules.MAP });
 
     return (
         <div className={styles.wrapper}>
