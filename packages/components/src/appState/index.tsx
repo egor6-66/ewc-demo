@@ -8,8 +8,6 @@ import styles from './styles.module.scss';
 const AppState = (props: IProps) => {
     const { operatorName } = props;
 
-    const [openDropdown, setOpenDropdown] = useState(false);
-
     const dropdownItems: IDropdown.Items = [
         {
             name: 'themes',
@@ -18,27 +16,17 @@ const AppState = (props: IProps) => {
         },
         {
             name: 'wadawd',
-            displayName: 'Тема',
-            onClick: () => console.log('wad'),
-        },
-        {
-            name: 'wadawd',
-            displayName: 'Тема',
-            onClick: () => console.log('wad'),
-        },
-        {
-            name: 'wdawdwa',
-            displayName: 'Тема',
+            displayName: 'Версии модулей',
             onClick: () => console.log('wad'),
         },
     ];
 
     return (
-        <div className={styles.wrapper} onClick={() => setOpenDropdown(!openDropdown)}>
+        <div className={styles.wrapper}>
             <div className={styles.operatorName}>{operatorName}</div>
 
             <div className={styles.dropdown}>
-                <Dropdown visible={openDropdown} items={dropdownItems} />
+                <Dropdown items={dropdownItems} />
             </div>
         </div>
     );

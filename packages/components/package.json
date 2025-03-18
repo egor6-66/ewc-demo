@@ -4,6 +4,7 @@
   "main": "./src/index.ts",
   "dependencies": {
     "@packages/ui": "*",
+    "@packages/ui": "*",
     "classnames": "^2.5.1"
   }
 }

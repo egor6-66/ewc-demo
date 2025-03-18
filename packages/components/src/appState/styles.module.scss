@@ -1,9 +1,8 @@
 @use '@packages/styles/src/mixins';
 
 .wrapper {
-  @include mixins.flex;
-  gap: 12px;
-  cursor: pointer;
+  @include mixins.flex(center, center);
+  gap: 8px;
 
   .operatorName{
 

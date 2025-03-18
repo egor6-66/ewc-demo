@@ -15,7 +15,7 @@ const Pages = () => {
 
     return (
         <div className={styles.wrapper}>
-            <div className={styles.info}>
+            <div className={styles.appState}>
                 <AppState operatorName={'112 Санкт-Петербург'} />
             </div>
             <AnimatePresence className={styles.main} animationKey={animationKey} visible={true}>

@@ -4,22 +4,30 @@
   @include mixins.flex-column;
   cursor: pointer;
 
-  .trigger{
+  .trigger {
+    @include mixins.box-size(30px, 30px);
+    @include mixins.flex(center, center);
   }
 
-  .dropdownContainer{
+  .dropdownContainer {
     position: relative;
 
-    .dropdown{
+    .dropdown {
+      @include mixins.flex-column;
+      border-radius: 12px 0 12px 12px;
+      background-color: var(--bg-primary);
+      box-shadow: 0 0 4px 0 var(--text-primary);
       position: absolute;
       top: 8px;
-      right: -12px;
-      padding: 6px 12px;
+      right: -24px;
+      overflow: hidden;
 
-      .item{
-        background-color: #0D4CD3;
+      .item {
+        @include mixins.box-size(100%, auto);
+        white-space: nowrap;
+        font-size: 16px;
+        margin: 6px 12px;
       }
     }
   }
-
 }

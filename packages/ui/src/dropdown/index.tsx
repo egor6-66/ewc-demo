@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+import { useClickAway } from '@packages/hooks';
 import { motion } from 'framer-motion';
 
 import AnimatePresence from '../animatePresence';
@@ -9,20 +10,27 @@ import { IProps } from './interfaces';
 import styles from './styles.module.scss';
 
 const Dropdown = (props: IProps) => {
-    const { visible = false, items } = props;
+    const { visible = false, items, onClickAway } = props;
     const [openDropdown, setOpenDropdown] = useState(visible);
+
+    const ref = useRef(null);
+
+    useClickAway(ref, () => {
+        setOpenDropdown(false);
+        onClickAway && onClickAway();
+    });
 
     useEffect(() => {
         setOpenDropdown(visible);
     }, [visible]);
 
     return (
-        <div className={styles.wrapper}>
+        <div className={styles.wrapper} ref={ref}>
             <motion.div animate={{ rotate: openDropdown ? 90 : 0 }} className={styles.trigger} onClick={() => setOpenDropdown((prev) => !prev)}>
                 <Icons icon={openDropdown ? 'close' : 'arrow'} />
             </motion.div>
             <div className={styles.dropdownContainer}>
-                <AnimatePresence visible={openDropdown} className={styles.dropdown}>
+                <AnimatePresence animationVariant={'autoHeight'} visible={openDropdown} className={styles.dropdown}>
                     {items.map((item) => (
                         <div className={styles.item} key={item.name}>
                             {item.displayName}

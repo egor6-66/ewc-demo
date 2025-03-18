@@ -7,6 +7,7 @@ export interface IItem {
 export interface IProps {
     visible?: boolean;
     items: Items;
+    onClickAway?: () => void;
 }
 
 export type Items = Array<IItem>;
