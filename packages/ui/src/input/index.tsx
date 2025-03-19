@@ -5,7 +5,7 @@ import { IProps } from './interfaces';
 
 import styles from './styles.module.scss';
 
-const Input = (props: IProps) => {
+const Input = forwardRef((props: IProps, ref) => {
     const { id, isLoading, displayName, disabled, ...attrs } = props;
 
     const wrapperClasses = classNames({
@@ -22,6 +22,6 @@ const Input = (props: IProps) => {
             <input className={inputClasses} {...attrs} />
         </div>
     );
-};
+});
 
 export default Input;

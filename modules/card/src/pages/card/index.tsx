@@ -59,10 +59,10 @@ const initWatcher = (fields: ICard.Fields, watch: UseFormWatch<any>, setValue: U
 const CardPage = () => {
     const params = useParams();
 
-    const { data: cardConfig } = useGetCardConfig(params.cardType);
+    const { data: cardConfig, refetch } = useGetCardConfig(params.cardType);
 
     const { handleSubmit, control, watch, getValues, setValue } = useForm();
-    console.log('render');
+
     useEffect(() => {
         if (cardConfig?.fields) {
             const watcher = initWatcher(cardConfig.fields, watch, setValue);
@@ -73,47 +73,70 @@ const CardPage = () => {
 
     const onSubmit = (data: any) => console.log(data);
 
-    const mapper = (field: ICard.IField) => {
-        switch (field.type) {
-            case ICard.Types.INPUT:
-                return (
-                    <Controller
-                        name={field.name}
-                        control={control}
-                        defaultValue={field.value}
-                        render={(data) => {
-                            return <Input id={field.name} disabled={field.disabled === 'true'} displayName={field.displayName} {...data.field} />;
-                        }}
-                    />
-                );
+    const fieldsMapper = (fields: any) => {
+        return fields?.map((field: any) => {
+            switch (field.type) {
+                case ICard.Types.INPUT:
+                    return (
+                        <Controller
+                            key={field.name}
+                            name={field.name}
+                            control={control}
+                            defaultValue={field.value}
+                            render={(data) => {
+                                return <Input id={field.name} disabled={field.disabled === 'true'} displayName={field.displayName} {...data.field} />;
+                            }}
+                        />
+                    );
 
-            case ICard.Types.CHECKBOX:
-                return (
-                    <Controller
-                        name={field.name}
-                        control={control}
-                        defaultValue={field.value === 'true'}
-                        render={(data) => (
-                            <Checkbox
-                                checked={data.field.value}
-                                onChange={(e) => setValue(field.name, e.currentTarget.checked)}
-                                displayName={field.displayName}
-                                {...data.field}
-                            />
-                        )}
-                    />
-                );
+                case ICard.Types.CHECKBOX:
+                    return (
+                        <Controller
+                            key={field.name}
+                            name={field.name}
+                            control={control}
+                            defaultValue={field.value === 'true'}
+                            render={(data) => (
+                                <Checkbox
+                                    checked={data.field.value}
+                                    onChange={(e) => setValue(field.name, e.currentTarget.checked)}
+                                    displayName={field.displayName}
+                                    {...data.field}
+                                />
+                            )}
+                        />
+                    );
 
-            case ICard.Types.BUTTON:
-                return <Button />;
-        }
+                case ICard.Types.BUTTON:
+                    return <Button key={field.name} />;
+            }
+        });
+    };
+
+    const groupsMapper = (groups: any) => {
+        return groups?.map((group: any) => {
+            const grid = {
+                // gridColumnStart: group.grid?.column?.start,
+                // gridColumnEnd: group.grid?.column?.end,
+                // gridRowStart: group.grid?.row?.start,
+                // gridRowEnd: group.grid?.row?.end,
+                gridColumnStart: group.grid?.column,
+                gridRowStart: group.grid?.row,
+            };
+
+            return (
+                <div key={group.name} className={styles.group} style={{ ...grid }}>
+                    {group.displayName}
+                    <div>{fieldsMapper(group?.fields)}</div>
+                </div>
+            );
+        });
     };
 
     return (
         <form onSubmit={handleSubmit(onSubmit)} className={styles.wrapper}>
-            {cardConfig?.fields?.map((field) => (
-                <div key={field.name}>{mapper(field)}</div>
-            ))}
+            <Button onClick={() => refetch()}>refetch</Button>
+            <div className={styles.container}>{groupsMapper(cardConfig?.groups)}</div>
         </form>
     );
 };

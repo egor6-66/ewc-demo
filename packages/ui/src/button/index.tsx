@@ -1,10 +1,10 @@
-import React, { PropsWithChildren } from 'react';
+import React, { forwardRef, PropsWithChildren } from 'react';
 
 import { IProps } from './interfaces';
 
 import styles from './styles.module.scss';
 
-const Button = (props: PropsWithChildren<IProps>) => {
+const Button = forwardRef((props: PropsWithChildren<IProps>, ref) => {
     const { children, isLoading, ...attrs } = props;
 
     return (
@@ -12,6 +12,6 @@ const Button = (props: PropsWithChildren<IProps>) => {
             {children}
         </button>
     );
-};
+});
 
 export default Button;

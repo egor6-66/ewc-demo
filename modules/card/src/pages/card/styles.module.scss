@@ -1,7 +1,20 @@
 @use '@packages/styles/src/mixins';
 
 .wrapper{
-  @include mixins.flex-column(center, center);
+  @include mixins.flex-column;
   @include mixins.box-size(100%, 100%);
+  padding: 12px;
   gap: 8px;
+
+  .container{
+    //@include mixins.box-size(100%, 100%);
+    display: grid;
+    gap: 12px;
+
+    .group{
+      background-color: #0D4CD3;
+      padding: 12px;
+      border-radius: 12px;
+    }
+  }
 }

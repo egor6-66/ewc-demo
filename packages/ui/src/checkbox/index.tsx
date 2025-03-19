@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 
 import { IProps } from './interfaces';
 
 import styles from './styles.module.scss';
 
-const Checkbox = (props: IProps) => {
+const Checkbox = forwardRef((props: IProps, ref) => {
     const { isLoading, displayName, ...attrs } = props;
 
     return (
@@ -13,6 +13,6 @@ const Checkbox = (props: IProps) => {
             <input className={styles.checkbox} type="checkbox" {...attrs} />
         </div>
     );
-};
+});
 
 export default Checkbox;
