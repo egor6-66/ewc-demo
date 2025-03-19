@@ -1,5 +1,6 @@
 import React from 'react';
 import { Route, Routes, useLocation } from 'react-router-dom';
+import { AppState } from '@packages/components';
 import { AnimatePresence, INavigation, Navigation } from '@packages/ui';
 
 import IncidentsPage from './incidents';
@@ -19,6 +20,9 @@ const WorkspacePage = () => {
 
     return (
         <div className={styles.wrapper}>
+            <div className={styles.appState}>
+                <AppState operatorName={'112 Санкт-Петербург'} />
+            </div>
             <div className={styles.navigations}>
                 <Navigation id={'WorkspacePage'} items={navItems} />
             </div>

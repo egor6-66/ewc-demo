@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
-import { Dropdown, Icons, IDropdown } from '@packages/ui';
+import React from 'react';
+import { useAccount, useThemes } from '@packages/hooks';
+import { Dropdown, IDropdown } from '@packages/ui';
 
 import { IProps } from './interfaces';
 
@@ -8,16 +9,19 @@ import styles from './styles.module.scss';
 const AppState = (props: IProps) => {
     const { operatorName } = props;
 
+    const { value, toggleBlackAndWhite } = useThemes();
+    const { login } = useAccount();
+
     const dropdownItems: IDropdown.Items = [
         {
-            name: 'themes',
-            displayName: 'Тема',
-            onClick: () => console.log('wad'),
+            name: 'themes_change',
+            displayName: `Изменить тему: ${value}`,
+            onClick: toggleBlackAndWhite,
         },
         {
-            name: 'wadawd',
-            displayName: 'Версии модулей',
-            onClick: () => console.log('wad'),
+            name: 'login',
+            displayName: 'Выйти из аккаунта',
+            onClick: login,
         },
     ];
 

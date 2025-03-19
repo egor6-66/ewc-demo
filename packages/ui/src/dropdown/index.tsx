@@ -31,8 +31,8 @@ const Dropdown = (props: IProps) => {
             </motion.div>
             <div className={styles.dropdownContainer}>
                 <AnimatePresence animationVariant={'autoHeight'} visible={openDropdown} className={styles.dropdown}>
-                    {items.map((item) => (
-                        <div className={styles.item} key={item.name}>
+                    {props.items.map((item: any) => (
+                        <div key={item.name} className={styles.item} onClick={item.onClick}>
                             {item.displayName}
                         </div>
                     ))}

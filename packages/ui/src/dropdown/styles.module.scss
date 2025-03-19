@@ -23,7 +23,9 @@
       overflow: hidden;
 
       .item {
+        @include mixins.flex(flex-start, center);
         @include mixins.box-size(100%, auto);
+        gap: 12px;
         white-space: nowrap;
         font-size: 16px;
         margin: 6px 12px;
