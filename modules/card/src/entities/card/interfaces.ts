@@ -2,6 +2,7 @@ export enum Types {
     CHECKBOX = 'CHECKBOX',
     INPUT = 'INPUT',
     BUTTON = 'BUTTON',
+    GROUP = 'GROUP',
 }
 
 export interface IAction {

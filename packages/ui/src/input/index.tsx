@@ -6,7 +6,7 @@ import { IProps } from './interfaces';
 import styles from './styles.module.scss';
 
 const Input = forwardRef((props: IProps, ref) => {
-    const { id, isLoading, displayName, disabled, nameStyles = {}, ...attrs } = props;
+    const { id, isLoading, displayName, disabled, wrapperStyles, nameStyles = {}, ...attrs } = props;
 
     const wrapperClasses = classNames({
         [styles.wrapper]: true,
@@ -17,7 +17,7 @@ const Input = forwardRef((props: IProps, ref) => {
     });
 
     return (
-        <div id={id} className={wrapperClasses} data-disabled={disabled}>
+        <div id={id} className={wrapperClasses} data-disabled={disabled} style={wrapperStyles}>
             <span className={styles.name} style={nameStyles}>
                 {displayName}
             </span>

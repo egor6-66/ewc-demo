@@ -39,14 +39,22 @@
           "name": "input1",
           "displayName": "инпут 1",
           "value": "",
-          "placeholder": "Введите значение"
+          "placeholder": "Введите значение",
+          "grid": {
+            "column": 1,
+            "row": 1
+          }
         },
         {
           "type": "INPUT",
           "name": "input2",
           "displayName": "инпут 2",
           "value": "",
-          "placeholder": "Введите значение"
+          "placeholder": "Введите значение",
+          "grid": {
+            "column": 2,
+            "row": 1
+          }
         }
       ]
     }

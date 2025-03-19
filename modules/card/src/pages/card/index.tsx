@@ -74,6 +74,11 @@ const CardPage = () => {
 
     const fieldsMapper = (group: any) => {
         return group?.fields?.map((field: any) => {
+            const grid = {
+                gridColumnStart: field.grid?.column,
+                gridRowStart: field.grid?.row,
+            };
+
             switch (field.type) {
                 case ICard.Types.INPUT:
                     return (
@@ -85,6 +90,7 @@ const CardPage = () => {
                             render={(data) => {
                                 return (
                                     <Input
+                                        wrapperStyles={grid}
                                         nameStyles={{ textAlign: group.grid?.column === 1 ? 'left' : 'right' }}
                                         id={field.name}
                                         disabled={field.disabled === 'true'}
@@ -105,6 +111,7 @@ const CardPage = () => {
                             defaultValue={field.value === 'true'}
                             render={(data) => (
                                 <Checkbox
+                                    wrapperStyles={grid}
                                     checked={data.field.value}
                                     onChange={(e) => setValue(field.name, e.currentTarget.checked)}
                                     displayName={field.displayName}
@@ -116,14 +123,19 @@ const CardPage = () => {
 
                 case ICard.Types.BUTTON:
                     return <Button key={field.name} />;
+
+                case ICard.Types.GROUP:
+                    return (
+                        <div className={styles.groups} style={grid}>
+                            {GroupsMapper(field.groups)}
+                        </div>
+                    );
             }
         });
     };
 
-    const groupsMapper = (groups: any, lvl: number) => {
+    function GroupsMapper(groups: any, isFirstLvl?: boolean) {
         return groups?.map((group: any) => {
-            const isFirstLvl = lvl === 1;
-
             const groupClasses = classNames({
                 [styles.group]: true,
                 [styles.group_firstLevel]: isFirstLvl,
@@ -141,12 +153,14 @@ const CardPage = () => {
                 </div>
             );
         });
-    };
+    }
 
     return (
         <form onSubmit={handleSubmit(onSubmit)} className={styles.wrapper}>
             <Button onClick={() => refetch()}>refetch</Button>
-            <div className={styles.container}>{groupsMapper(cardConfig?.groups, 1)}</div>
+            <div className={styles.groups} style={{ gap: 2 }}>
+                {GroupsMapper(cardConfig?.groups, true)}
+            </div>
         </form>
     );
 };
