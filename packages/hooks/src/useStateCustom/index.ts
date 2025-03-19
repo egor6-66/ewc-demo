@@ -30,6 +30,13 @@ function useStateCustom<T>(defaultValue: T, options?: IOptions) {
         }
     };
 
+    const toggle = () => {
+        if (typeof state === 'boolean') {
+            // @ts-ignore
+            set((prev) => !prev);
+        }
+    };
+
     const clear = () => {
         if (storage) {
             storageManager(storage.type || defaultStorage).remove(storage.key);
@@ -44,7 +51,7 @@ function useStateCustom<T>(defaultValue: T, options?: IOptions) {
         }
     }, [state]);
 
-    return { value: state, set, clear };
+    return { value: state, set, toggle, clear };
 }
 
 export default useStateCustom;

@@ -6,6 +6,19 @@ const Icons = (props: IProps) => {
     const { icon } = props;
 
     switch (icon) {
+        case 'select':
+            return (
+                <svg width="12" height="10" viewBox="0 0 12 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M10.6666 1.79163L4.24992 8.20829L1.33325 5.29163"
+                        stroke="var(--text-primary)"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                    />
+                </svg>
+            );
+
         case 'arrow':
             return (
                 <svg width="8" height="6" viewBox="0 0 8 6" fill="none" xmlns="http://www.w3.org/2000/svg">

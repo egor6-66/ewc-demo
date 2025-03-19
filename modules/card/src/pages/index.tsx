@@ -1,6 +1,9 @@
 import React from 'react';
 import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
+import { AppState } from '@packages/components';
 import { AnimatePresence } from '@packages/ui';
+
+import { useGetCardConfig } from '@/features';
 
 import CardPage from './card';
 
@@ -12,28 +15,26 @@ const Pages = () => {
 
     const animationKey = location.pathname.split('/')[1];
 
-    const tabs = [
-        { id: 'fesf3', type: '112' },
-        { id: '3rfed', type: '01' },
-        { id: '2rdad', type: '02' },
-        { id: 'da3ed', type: '03' },
-    ];
+    const variants = ['BASE'];
 
     return (
         <div className={styles.wrapper}>
+            <div className={styles.appState}>
+                <AppState operatorName={'112 Санкт-Петербург'} />
+            </div>
             <div className={styles.tabs}>
                 <div className={styles.tab} onClick={() => navigate(`/workspace/incidents`)}>
                     BACk
                 </div>
-                {tabs.map((tab) => (
-                    <div className={styles.tab} key={tab.id} onClick={() => navigate(`/card/${tab.type}/${tab.id}`)}>
-                        {tab.type}
+                {variants.map((variant) => (
+                    <div className={styles.tab} key={variant} onClick={() => navigate(`/card/${variant}`)}>
+                        {variant}
                     </div>
                 ))}
             </div>
             <AnimatePresence className={styles.main} animationKey={animationKey} visible={true}>
                 <Routes location={location} key={animationKey}>
-                    <Route path="card/:cardType/:cardId" element={<CardPage />} />
+                    <Route path="card/:cardId" element={<CardPage />} />
                 </Routes>
             </AnimatePresence>
         </div>

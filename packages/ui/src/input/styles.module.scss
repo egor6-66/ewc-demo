@@ -1,22 +1,27 @@
 @use '@packages/styles/src/mixins';
 
 .wrapper {
-  @include mixins.flex(center, center);
-  gap: 12px;
-  transition: background-color 0.25s ;
-  border-radius: 12px;
-  padding: 6px 12px;
+  @include mixins.flex(space-between, center);
+  @include mixins.box-size(100%, auto);
+  gap: 16px;
+  transition: background-color 0.25s;
 
-  &[data-disabled=true]{
-    background-color: red!important;
+  &[data-disabled=true] {
+    background-color: red !important;
   }
 
-  .input{
-    border-radius: 12px;
-    padding: 6px 12px;
+  .name {
+    @include mixins.text(var(--text-primary), 14px, 600);
+    text-align: left;
+    flex: 1;
+  }
+
+  .input {
+    @include mixins.text(var(--text-primary), 14px, 500);
+    border-radius: 4px;
+    padding: 2px 10px;
     color: var(--text-primary);
-    background-color: var(--bg-substrate);
-
-
+    background-color: var(--bg-active);
+    border: 1px solid var(--border-area);
   }
 }

@@ -58,9 +58,7 @@ const initWatcher = (fields: ICard.Fields, watch: UseFormWatch<any>, setValue: U
 
 const CardPage = () => {
     const params = useParams();
-
-    const { data: cardConfig, refetch } = useGetCardConfig(params.cardType);
-
+    const { data: cardConfig, refetch } = useGetCardConfig(params.cardId);
     const { handleSubmit, control, watch, getValues, setValue } = useForm();
 
     useEffect(() => {
@@ -73,8 +71,8 @@ const CardPage = () => {
 
     const onSubmit = (data: any) => console.log(data);
 
-    const fieldsMapper = (fields: any) => {
-        return fields?.map((field: any) => {
+    const fieldsMapper = (group: any) => {
+        return group?.fields?.map((field: any) => {
             switch (field.type) {
                 case ICard.Types.INPUT:
                     return (
@@ -84,7 +82,15 @@ const CardPage = () => {
                             control={control}
                             defaultValue={field.value}
                             render={(data) => {
-                                return <Input id={field.name} disabled={field.disabled === 'true'} displayName={field.displayName} {...data.field} />;
+                                return (
+                                    <Input
+                                        nameStyles={{ textAlign: group.grid?.column === 1 ? 'left' : 'right' }}
+                                        id={field.name}
+                                        disabled={field.disabled === 'true'}
+                                        displayName={field.displayName}
+                                        {...data.field}
+                                    />
+                                );
                             }}
                         />
                     );
@@ -116,18 +122,14 @@ const CardPage = () => {
     const groupsMapper = (groups: any) => {
         return groups?.map((group: any) => {
             const grid = {
-                // gridColumnStart: group.grid?.column?.start,
-                // gridColumnEnd: group.grid?.column?.end,
-                // gridRowStart: group.grid?.row?.start,
-                // gridRowEnd: group.grid?.row?.end,
                 gridColumnStart: group.grid?.column,
                 gridRowStart: group.grid?.row,
             };
 
             return (
                 <div key={group.name} className={styles.group} style={{ ...grid }}>
-                    {group.displayName}
-                    <div>{fieldsMapper(group?.fields)}</div>
+                    <div className={styles.name}>{group.displayName}</div>
+                    <div className={styles.fields}>{fieldsMapper(group)}</div>
                 </div>
             );
         });

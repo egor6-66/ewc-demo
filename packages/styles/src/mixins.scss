@@ -22,7 +22,8 @@
   flex-direction: column;
 }
 
-@mixin text($color,  $fz: 16, ) {
+@mixin text($color,  $fz: 16, $fw: 600) {
   color: $color;
   font-size: $fz;
+  font-weight: $fw;
 }

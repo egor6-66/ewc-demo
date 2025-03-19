@@ -1,20 +1,34 @@
 @use '@packages/styles/src/mixins';
 
-.wrapper{
-  @include mixins.flex-column;
+.wrapper {
+  @include mixins.flex-column(center, center);
   @include mixins.box-size(100%, 100%);
   padding: 12px;
   gap: 8px;
 
-  .container{
-    //@include mixins.box-size(100%, 100%);
+  .container {
     display: grid;
     gap: 12px;
+    padding: 8px;
+    border-radius: 12px;
+    background-color: var(--bg-primary);
 
-    .group{
-      background-color: #0D4CD3;
+    .group {
+      @include mixins.flex-column;
+      gap: 12px;
       padding: 12px;
       border-radius: 12px;
+
+      .name {
+        @include mixins.text(var(--text-primary), 16px, 700);
+      }
+
+      .fields {
+        display: grid;
+        gap: 12px;
+        padding: 12px;
+        border-radius: 12px;
+      }
     }
   }
 }

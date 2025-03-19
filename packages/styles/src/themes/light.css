@@ -1,5 +1,6 @@
 [data-theme="light"] {
     --bg-primary: #FFFFFF;
+    --bg-active: #FFFFFF;
     --bg-substrate: #F1F1F1;
     --bg-local: #F5F5F5;
     --bg-green: #C3FFC6;

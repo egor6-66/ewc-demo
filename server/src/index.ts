@@ -13,9 +13,13 @@ function Bootstrap() {
     const pathToConfigsDir = path.join(__dirname, 'configs');
     app.use(cors());
 
-    app.get('/cardConfig/:type', async (req: any, res: any) => {
-        const params = req.params;
-        res.send(getConfig(path.join(pathToConfigsDir, `card.json`)));
+    app.get('/form/:variant', async (req: any, res: any) => {
+        try {
+            const params = req.params;
+            res.send(getConfig(path.join(path.join(pathToConfigsDir, 'forms'), `${params.variant}.json`)));
+        } catch (e) {
+            console.log(e);
+        }
     });
 
     app.get('/reportsConfig', async (req: any, res: any) => {
