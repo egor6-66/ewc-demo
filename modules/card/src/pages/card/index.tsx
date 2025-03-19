@@ -3,6 +3,7 @@ import { Control, Controller, FieldValue, SubmitHandler, useForm, useFormContext
 import { useParams } from 'react-router-dom';
 import { useStateCustom } from '@packages/hooks';
 import { Button, Checkbox, Input } from '@packages/ui';
+import classNames from 'classnames';
 
 import { ICard } from '@/entities';
 import { useGetCardConfig } from '@/features';
@@ -87,7 +88,7 @@ const CardPage = () => {
                                         nameStyles={{ textAlign: group.grid?.column === 1 ? 'left' : 'right' }}
                                         id={field.name}
                                         disabled={field.disabled === 'true'}
-                                        displayName={field.displayName}
+                                        {...field}
                                         {...data.field}
                                     />
                                 );
@@ -119,15 +120,22 @@ const CardPage = () => {
         });
     };
 
-    const groupsMapper = (groups: any) => {
+    const groupsMapper = (groups: any, lvl: number) => {
         return groups?.map((group: any) => {
+            const isFirstLvl = lvl === 1;
+
+            const groupClasses = classNames({
+                [styles.group]: true,
+                [styles.group_firstLevel]: isFirstLvl,
+            });
+
             const grid = {
                 gridColumnStart: group.grid?.column,
                 gridRowStart: group.grid?.row,
             };
 
             return (
-                <div key={group.name} className={styles.group} style={{ ...grid }}>
+                <div key={group.name} className={groupClasses} style={{ ...grid }}>
                     <div className={styles.name}>{group.displayName}</div>
                     <div className={styles.fields}>{fieldsMapper(group)}</div>
                 </div>
@@ -138,7 +146,7 @@ const CardPage = () => {
     return (
         <form onSubmit={handleSubmit(onSubmit)} className={styles.wrapper}>
             <Button onClick={() => refetch()}>refetch</Button>
-            <div className={styles.container}>{groupsMapper(cardConfig?.groups)}</div>
+            <div className={styles.container}>{groupsMapper(cardConfig?.groups, 1)}</div>
         </form>
     );
 };
