@@ -1,21 +1,10 @@
-
+@use '@packages/styles/src/mixins';
 .wrapper{
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
-  gap: 12px;
+  @include mixins.box-size(100%, 100%);
+  @include mixins.flex-column();
 
-
-  .refetch{
-    color: var(--text-primary);
-    cursor: pointer;
-  }
   .form{
-    width: 100%;
-    height: 100%;
+    @include mixins.box-size(100%, 100%);
     flex: 1;
   }
 }

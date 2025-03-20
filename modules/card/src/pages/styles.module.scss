@@ -19,8 +19,15 @@
     @include mixins.flex-column;
   }
 
-  .main{
+  .cardContainer{
     @include mixins.box-size(100%, 100%);
-    flex: 1;
+    @include mixins.flex-column;
+    background-color: var(--bg-primary);
+    border-radius: 0 0 12px 12px;
+
+    .main{
+      @include mixins.box-size(100%, 100%);
+      flex: 1;
+    }
   }
 }

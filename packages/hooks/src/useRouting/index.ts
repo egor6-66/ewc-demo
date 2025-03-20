@@ -10,6 +10,10 @@ function useRouting() {
     const navigate = useNavigate();
     const location = useLocation();
 
+    const navigateWithParam = (path: string, key: Params, value: string) => {
+        navigate(`${path}${key}/${value}`);
+    };
+
     const getParams = (): Record<Params, string> => {
         const pathArr = location.pathname.split('/') as Array<Params>;
 
@@ -22,7 +26,7 @@ function useRouting() {
         }, params);
     };
 
-    return { navigate, location, getParams };
+    return { navigate, navigateWithParam, location, getParams };
 }
 
 export default useRouting;

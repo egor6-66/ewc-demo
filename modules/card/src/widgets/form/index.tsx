@@ -1,6 +1,5 @@
 import React from 'react';
 import { DynamicForm } from '@packages/dynamic-form';
-import { Button } from '@packages/ui';
 
 import { useGetCardConfig } from '@/features';
 
@@ -15,9 +14,6 @@ const Form = (props: IProps) => {
 
     return (
         <div className={styles.wrapper}>
-            <div className={styles.refetch} onClick={() => refetch()}>
-                REFETCH
-            </div>
             <div className={styles.form}>
                 <DynamicForm config={cardConfig} />
             </div>
