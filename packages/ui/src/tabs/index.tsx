@@ -1,35 +1,34 @@
 import React, { PropsWithChildren } from 'react';
 import classNames from 'classnames';
 
-import AnimatePresence from '../animatePresence';
-
-import { IProps } from './interfaces';
+import { IItem, IProps } from './interfaces';
 
 import styles from './styles.module.scss';
 
 const Tabs = (props: PropsWithChildren<IProps>) => {
-    const { tabs, children, childAnimationKey, classes } = props;
+    const { items, activeItem, children, className, handleTabClick } = props;
+
+    const tabClick = (item: IItem) => {
+        item.onClick && item.onClick(item);
+        handleTabClick && handleTabClick(item);
+    };
 
     return (
-        <div className={classNames(styles.wrapper, classes?.wrapper)}>
-            <div className={classNames(styles.tabs, classes?.tabs)}>
-                {tabs.map((tab) => {
-                    const isActive = tab?.checkActive(tab);
-
+        <div className={classNames(styles.wrapper, className)}>
+            <div className={styles.items}>
+                {items.map((item) => {
                     return (
                         <div
-                            key={tab.name}
-                            className={classNames(styles.tab, classes?.tab, isActive ? styles.tab_active : '')}
-                            onClick={() => tab.onClick(tab)}
+                            key={item.name}
+                            className={classNames(styles.item, activeItem === item.name ? styles.item_active : '')}
+                            onClick={() => tabClick(item)}
                         >
-                            {tab.displayName}
+                            {item.displayName}
                         </div>
                     );
                 })}
             </div>
-            <AnimatePresence animationKey={childAnimationKey} visible={true} className={classNames(styles.children, classes.children)}>
-                {children}
-            </AnimatePresence>
+            {children}
         </div>
     );
 };

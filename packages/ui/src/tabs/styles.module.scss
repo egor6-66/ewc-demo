@@ -2,13 +2,13 @@
 
 .wrapper {
 
-  .tabs {
+  .items {
     @include mixins.box-size(100%, 40px);
     @include mixins.text(var(--text-primary), 18px);
     @include mixins.flex;
     gap: 12px;
 
-    .tab{
+    .item{
       cursor: pointer;
       transition: color 0.2s;
 
@@ -16,15 +16,5 @@
         color: var(--blue-primary);
       }
     }
-  }
-
-  .children {
-
-  }
-
-  .line {
-    background-color: var(--blue-primary);
-    @include mixins.box-size(100%, 2px);
-    margin-top: 4px;
   }
 }

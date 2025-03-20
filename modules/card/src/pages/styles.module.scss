@@ -6,7 +6,6 @@
   @include mixins.flex-column();
   padding: 12px;
   position: relative;
-  gap: 12px;
 
   .appState{
     position: absolute;
@@ -16,18 +15,8 @@
   }
 
   .tabs{
-    @include mixins.box-size(100%, 40px);
-    @include mixins.flex();
-    gap: 12px;
-
-    .tab{
-      @include mixins.box-size(auto, 40px);
-      @include mixins.flex();
-      padding: 12px;
-      background-color: var(--bg-primary);
-      border-radius: 12px;
-      cursor: pointer;
-    }
+    @include mixins.box-size(100%, 100%);
+    @include mixins.flex-column;
   }
 
   .main{

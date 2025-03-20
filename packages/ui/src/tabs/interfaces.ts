@@ -1,24 +1,18 @@
 import { ReactNode } from 'react';
 
-type TabWithOutCallback = Omit<ITab, 'onClick'>;
+type TabWithOutCallback = Omit<IItem, 'onClick'>;
 
-export interface ITab {
+export interface IItem {
     name: string;
     displayName: ReactNode;
-    checkActive: (tab: TabWithOutCallback) => boolean;
-    onClick: (tab: TabWithOutCallback) => void;
+    onClick?: (item: TabWithOutCallback) => void;
 }
 
 export interface IProps {
-    id?: string;
-    tabs: Tabs;
-    childAnimationKey?: string;
-    classes?: {
-        wrapper?: string;
-        tabs?: string;
-        tab?: string;
-        children?: string;
-    };
+    items: Items;
+    activeItem: string;
+    handleTabClick?: (item: TabWithOutCallback) => void;
+    className: string;
 }
 
-export type Tabs = Array<ITab>;
+export type Items = Array<IItem>;

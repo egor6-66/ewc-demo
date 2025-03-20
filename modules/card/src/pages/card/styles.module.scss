@@ -5,30 +5,4 @@
   @include mixins.box-size(100%, 100%);
   padding: 12px;
   gap: 8px;
-
-  .groups {
-    display: grid;
-    gap: 12px;
-    border-radius: 16px;
-
-    .group {
-      @include mixins.flex-column;
-      gap: 12px;
-      background-color: var(--bg-primary);
-
-      &_firstLevel {
-        padding: 12px;
-        border-radius: 4px;
-      }
-
-      .name {
-        @include mixins.text(var(--text-primary), 16px, 700);
-      }
-
-      .fields {
-        display: grid;
-        gap: 12px;
-      }
-    }
-  }
 }

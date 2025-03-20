@@ -20,10 +20,8 @@ const Items = (props: IProps) => {
         <div className={classes}>
             {items?.map((item: any) => {
                 const grid = {
-                    gridColumnStart: item.grid?.column,
-                    gridRowStart: item.grid?.row,
-                    gridColumnEnd: item.grid?.columnEnd,
-                    gridRowEnd: item.grid?.rowEnd,
+                    gridColumn: item.grid?.column,
+                    gridRow: item.grid?.row,
                 };
 
                 switch (item.type) {
