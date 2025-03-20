@@ -4,13 +4,18 @@
 
   .items {
     @include mixins.box-size(100%, 40px);
-    @include mixins.text(var(--text-primary), 18px);
     @include mixins.flex;
-    gap: 12px;
+    gap: 2px;
 
     .item{
+      @include mixins.text(var(--text-primary), 14px, 600);
+      @include mixins.flex(center, center);
       cursor: pointer;
+      padding: 14px 32px;
       transition: color 0.2s;
+      background-color: var(--bg-local);
+      border: 1px solid var(--border-bg);
+      border-radius: 12px 12px 0 0;
 
       &_active{
         color: var(--blue-primary);

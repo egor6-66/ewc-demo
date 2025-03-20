@@ -1,12 +1,13 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
+import { useRouting } from '@packages/hooks';
 
 import { Form } from '@/widgets';
 
 import styles from './styles.module.scss';
 
 const CardPage = () => {
-    const params = useParams();
+    const { getParams } = useRouting();
+    const params = getParams();
 
     return (
         <div className={styles.wrapper}>
