@@ -1,142 +1,28 @@
 {
   "version": "1.0.0",
   "description": "CARD 112",
-  "groups": [
+  "items": [
     {
+      "type": "GROUP",
       "name": "group_1",
       "displayName": "группа 1",
+      "value": "true",
+      "placeholder": "",
       "grid": {
         "column": 1,
         "row": 1
-      },
-      "fields": [
-        {
-          "type": "GROUP",
-          "name": "checkbox1",
-          "displayName": "Группа",
-          "value": "false",
-          "placeholder": "",
-          "grid": {
-            "column": 1,
-            "row": 2
-          },
-          "groups": [
-            {
-              "name": "group_2",
-              "displayName": "вложенная группа 2",
-              "grid": {
-                "column": 1,
-                "row": 1
-              },
-              "fields": [
-                {
-                  "type": "CHECKBOX",
-                  "name": "checkbox1",
-                  "displayName": "чекбок 1",
-                  "value": "false",
-                  "placeholder": ""
-                }
-              ]
-            },
-            {
-              "name": "group_3",
-              "displayName": "вложенная группа 3",
-              "grid": {
-                "column": 1,
-                "row": 2
-              },
-              "fields": [
-                {
-                  "type": "CHECKBOX",
-                  "name": "checkbox1",
-                  "displayName": "чекбок 1",
-                  "value": "false",
-                  "placeholder": ""
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "type": "CHECKBOX",
-          "name": "checkbox1",
-          "displayName": "чекбок 1",
-          "value": "false",
-          "placeholder": "",
-          "grid": {
-            "column": 1,
-            "row": 1
-          }
-        }
-      ]
+      }
     },
     {
-      "name": "group_2",
-      "displayName": "группа 2",
+      "type": "INPUT",
+      "name": "input_1",
+      "displayName": "инпут 1",
+      "value": "",
+      "placeholder": "Введите значение",
       "grid": {
         "column": 1,
         "row": 2
-      },
-      "fields": [
-        {
-          "type": "GROUP",
-          "name": "checkbox1",
-          "displayName": "чекбок 1",
-          "value": "false",
-          "placeholder": "",
-          "grid": {
-            "column": 1,
-            "row": 2
-          },
-          "groups": [
-            {
-              "name": "group_2",
-              "displayName": "вложенная группа 2",
-              "grid": {
-                "column": 1,
-                "row": 1
-              },
-              "fields": [
-                {
-                  "type": "CHECKBOX",
-                  "name": "checkbox1",
-                  "displayName": "чекбок 1",
-                  "value": "false",
-                  "placeholder": ""
-                }
-              ]
-            },
-            {
-              "name": "group_3",
-              "displayName": "вложенная группа 3",
-              "grid": {
-                "column": 1,
-                "row": 2
-              },
-              "fields": [
-                {
-                  "type": "CHECKBOX",
-                  "name": "checkbox1",
-                  "displayName": "чекбок 1",
-                  "value": "false",
-                  "placeholder": ""
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "type": "CHECKBOX",
-          "name": "checkbox1",
-          "displayName": "чекбок 1",
-          "value": "false",
-          "placeholder": "",
-          "grid": {
-            "column": 1,
-            "row": 1
-          }
-        }
-      ]
+      }
     }
   ]
 }

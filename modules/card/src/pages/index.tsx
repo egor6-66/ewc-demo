@@ -3,8 +3,6 @@ import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 import { AppState } from '@packages/components';
 import { AnimatePresence } from '@packages/ui';
 
-import { useGetCardConfig } from '@/features';
-
 import CardPage from './card';
 
 import styles from './styles.module.scss';

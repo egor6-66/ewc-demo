@@ -1,6 +1,17 @@
 {
   "version": "1.0.0",
   "description": "CARD 112",
+  "items":[
+    {
+      "type": "GROUP",
+      "name": "group_1",
+      "displayName": "checkbox1",
+      "value": "false",
+      "placeholder": "",
+      "options": [],
+      "disabled": "false"
+    }
+  ],
   "groups": [
     {
       "name": "group_1",

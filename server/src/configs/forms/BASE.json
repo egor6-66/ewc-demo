@@ -1,6 +1,9 @@
 {
   "version": "1.0.0",
   "description": "CARD 112",
+  "items": [
+
+  ],
   "groups": [
     {
       "name": "group_1",

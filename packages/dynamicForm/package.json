@@ -1,9 +1,10 @@
 {
-  "name": "@packages/components",
+  "name": "@packages/dynamic-form",
   "version": "1.0.0",
   "main": "./src/index.ts",
   "dependencies": {
     "@packages/ui": "*",
+    "react-hook-form": "^7.54.2",
     "classnames": "^2.5.1"
   }
 }
