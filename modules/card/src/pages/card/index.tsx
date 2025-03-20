@@ -10,9 +10,7 @@ const CardPage = () => {
 
     return (
         <div className={styles.wrapper}>
-            <div className={styles.form}>
-                <Form id={params.cardId} />
-            </div>
+            <Form id={params.cardId} />
         </div>
     );
 };

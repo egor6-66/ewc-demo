@@ -11,12 +11,19 @@ import styles from './styles.module.scss';
 const Items = (props: IProps) => {
     const { items, control, isFirstLvl } = props;
 
+    const classes = classNames({
+        [styles.wrapper]: true,
+        [styles.wrapper_firstLvl]: isFirstLvl,
+    });
+
     return (
-        <div className={styles.wrapper}>
+        <div className={classes}>
             {items?.map((item: any) => {
                 const grid = {
                     gridColumnStart: item.grid?.column,
                     gridRowStart: item.grid?.row,
+                    gridColumnEnd: item.grid?.columnEnd,
+                    gridRowEnd: item.grid?.rowEnd,
                 };
 
                 switch (item.type) {
@@ -65,7 +72,7 @@ const Items = (props: IProps) => {
                         return <Button key={item.name} />;
 
                     case Types.GROUP:
-                        return <Group key={item.name} item={item} control={control} isFirstLvl={isFirstLvl} />;
+                        return <Group key={item.name} item={item} control={control} grid={grid} isFirstLvl={isFirstLvl} />;
                 }
             })}
         </div>

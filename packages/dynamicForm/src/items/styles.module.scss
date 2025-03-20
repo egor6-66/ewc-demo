@@ -3,6 +3,9 @@
 .wrapper {
   @include mixins.box-size(100%, 100%);
   display: grid;
-  padding: 12px;
   gap: 8px;
+
+  &_firstLvl {
+
+  }
 }

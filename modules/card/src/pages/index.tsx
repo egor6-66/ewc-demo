@@ -13,7 +13,7 @@ const Pages = () => {
 
     const animationKey = location.pathname.split('/')[1];
 
-    const variants = ['BASE', 'RECURSIVE'];
+    const variants = ['BASE', 'RECURSIVE', 'CUSTOM'];
 
     return (
         <div className={styles.wrapper}>

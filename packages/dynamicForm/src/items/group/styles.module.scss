@@ -5,17 +5,18 @@
   @include mixins.box-size(100%, 100%);
   gap: 8px;
   background-color: var(--bg-primary);
+  border: 1px solid white;
 
-  &_firstLevel {
+  &_firstLvl {
     padding: 12px;
     border-radius: 4px;
   }
 
-  .name{
+  .name {
 
   }
 
-  .items{
+  .items {
 
   }
 }
