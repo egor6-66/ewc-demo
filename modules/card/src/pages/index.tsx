@@ -13,6 +13,7 @@ const Pages = () => {
     const params = getParams();
 
     const tebItems: ITab.Items = [
+        { name: 'YKIO', displayName: 'УКИО' },
         { name: 'BASE', displayName: 'Базовый шаблон' },
         { name: 'RECURSIVE', displayName: 'Много вложенностей' },
         { name: 'CUSTOM', displayName: 'Кастомный' },

@@ -8,11 +8,12 @@ import { IProps } from './interfaces';
 import styles from './styles.module.scss';
 
 const Group = (props: IProps) => {
-    const { item, control, isFirstLvl, grid } = props;
+    const { item, control, isFirstLvl, grid, itemIndex } = props;
 
     const classes = classNames({
         [styles.wrapper]: true,
         [styles.wrapper_firstLvl]: isFirstLvl,
+        [styles.wrapper_firstElement]: itemIndex === 0,
     });
 
     return (

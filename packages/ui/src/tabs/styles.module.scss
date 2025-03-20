@@ -1,6 +1,7 @@
 @use '@packages/styles/src/mixins';
 
 .wrapper {
+
   .items {
     @include mixins.box-size(100%, 40px);
     @include mixins.flex;
@@ -17,6 +18,7 @@
       border: 1px solid var(--border-bg);
       border-bottom: none;
       border-radius: 12px 12px 0 0;
+      white-space: nowrap;
 
       &_active {
         background-color: var(--bg-primary);

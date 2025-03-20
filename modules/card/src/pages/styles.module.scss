@@ -22,7 +22,7 @@
   .cardContainer{
     @include mixins.box-size(100%, 100%);
     @include mixins.flex-column;
-    background-color: var(--bg-primary);
+    //background-color: var(--bg-primary);
     border-radius: 0 0 12px 12px;
 
     .main{

@@ -6,4 +6,5 @@ export interface IProps {
     control: Control;
     isFirstLvl?: boolean;
     grid: CSSProperties;
+    itemIndex: number;
 }

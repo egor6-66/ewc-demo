@@ -18,7 +18,7 @@ const Items = (props: IProps) => {
 
     return (
         <div className={classes}>
-            {items?.map((item: any) => {
+            {items?.map((item: any, index: number) => {
                 const grid = {
                     gridColumn: item.grid?.column,
                     gridRow: item.grid?.row,
@@ -36,7 +36,7 @@ const Items = (props: IProps) => {
                                     return (
                                         <Input
                                             wrapperStyles={grid}
-                                            nameStyles={{ textAlign: item.grid?.column === 1 ? 'left' : 'right' }}
+                                            nameStyles={{ textAlign: item.grid?.column?.indexOf('1') > -1 ? 'left' : 'right' }}
                                             id={item.name}
                                             disabled={item.disabled === 'true'}
                                             {...item}
@@ -70,7 +70,7 @@ const Items = (props: IProps) => {
                         return <Button key={item.name} />;
 
                     case Types.GROUP:
-                        return <Group key={item.name} item={item} control={control} grid={grid} isFirstLvl={isFirstLvl} />;
+                        return <Group key={item.name} item={item} control={control} grid={grid} isFirstLvl={isFirstLvl} itemIndex={index} />;
                 }
             })}
         </div>

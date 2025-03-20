@@ -10,11 +10,9 @@ html {
     user-select: none;
     scroll-behavior: smooth;
     background-color: var(--bg-substrate);
+    overflow: hidden;
 }
-.aClassName{
-    background-color: #0D4CD3!important;
 
-}
 body {
     height: 100vh;
     width: 100%;

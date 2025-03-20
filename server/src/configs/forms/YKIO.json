@@ -1,0 +1,164 @@
+{
+  "version": "1.0.0",
+  "description": "УКИО",
+  "items": [
+    {
+      "type": "GROUP",
+      "name": "info",
+      "displayName": "Информация",
+      "value": "",
+      "placeholder": "",
+      "grid": {
+        "column": "1",
+        "row": "1"
+      },
+      "items": [
+        {
+          "type": "INPUT",
+          "name": "card_number",
+          "displayName": "№ карточки",
+          "value": "",
+          "placeholder": "",
+          "grid": {
+            "column": "1",
+            "row": "1"
+          }
+        },
+        {
+          "type": "INPUT",
+          "name": "date_of_access",
+          "displayName": "Дата обращения",
+          "value": "",
+          "placeholder": "",
+          "grid": {
+            "column": "1",
+            "row": "2"
+          }
+        },
+        {
+          "type": "INPUT",
+          "name": "processing_ime",
+          "displayName": "Время обработки",
+          "value": "",
+          "placeholder": "",
+          "grid": {
+            "column": "2",
+            "row": "1"
+          }
+        },
+        {
+          "type": "INPUT",
+          "name": "registration_time",
+          "displayName": "Время регистрации",
+          "value": "",
+          "placeholder": "",
+          "grid": {
+            "column": "2",
+            "row": "2"
+          }
+        },
+        {
+          "type": "INPUT",
+          "name": "incoming_number",
+          "displayName": "Входящий номер",
+          "value": "",
+          "placeholder": "",
+          "grid": {
+            "column": "3",
+            "row": "1"
+          }
+        },
+        {
+          "type": "INPUT",
+          "name": "creator",
+          "displayName": "Создатель",
+          "value": "",
+          "placeholder": "",
+          "grid": {
+            "column": "3",
+            "row": "2"
+          }
+        },
+        {
+          "type": "INPUT",
+          "name": "type_of_incident",
+          "displayName": "Тип происшествия",
+          "value": "",
+          "placeholder": "",
+          "grid": {
+            "column": "1/3",
+            "row": "3"
+          },
+          "style": {
+          }
+        },
+        {
+          "type": "INPUT",
+          "name": "call_source",
+          "displayName": "Источник вызова",
+          "value": "",
+          "placeholder": "",
+          "grid": {
+            "column": "3",
+            "row": "3"
+          }
+        }
+      ]
+    },
+    {
+      "type": "GROUP",
+      "name": "scene of incident",
+      "displayName": "Место происшествия",
+      "value": "",
+      "placeholder": "",
+      "grid": {
+        "column": "1",
+        "row": "2"
+      }
+    },
+    {
+      "type": "GROUP",
+      "name": "description of incident",
+      "displayName": "Описание происшествия",
+      "value": "",
+      "placeholder": "",
+      "grid": {
+        "column": "1",
+        "row": "3"
+      }
+    },
+    {
+      "type": "GROUP",
+      "name": "information about applicant",
+      "displayName": "Информация о заявителе",
+      "value": "",
+      "placeholder": "",
+      "grid": {
+        "column": "1",
+        "row": "4"
+      }
+    },
+    {
+      "type": "GROUP",
+      "name": "subscriber device",
+      "displayName": "Абонентское устройство",
+      "value": "",
+      "placeholder": "",
+      "grid": {
+        "column": "1",
+        "row": "5"
+      }
+    },
+    {
+      "type": "GROUP",
+      "name": "footer",
+      "displayName": "",
+      "value": "",
+      "placeholder": "",
+      "grid": {
+        "column": "1",
+        "row": "6"
+      }
+    }
+  ]
+}
