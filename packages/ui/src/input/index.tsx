@@ -22,11 +22,7 @@ const Input = forwardRef((props: IProps, ref) => {
         <div id={id} className={wrapperClasses} data-disabled={disabled} style={wrapperStyle}>
             <span className={styles.name} style={{ ...nameStyle }}>
                 {displayName}
-                {required && (
-                    <span className={styles.requiredIcon}>
-                        <Icons icon={'required'} />
-                    </span>
-                )}
+                <span className={styles.requiredIcon}>{required && <Icons icon={'required'} />}</span>
             </span>
             <input className={inputClasses} style={inputStyle} {...attrs} />
         </div>

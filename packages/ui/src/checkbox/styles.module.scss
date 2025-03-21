@@ -22,12 +22,10 @@
     background-color: var(--bg-active);
     border: 2px solid var(--border-area);
     cursor: pointer;
-    transition: transform 0.5s;
 
-    &:hover{
-      transform: scale(1.1, 1.1);
+    .icon{
+      @include mixins.flex(center, center);
     }
-
   }
 
   .disabled {

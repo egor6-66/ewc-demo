@@ -13,8 +13,7 @@
   .name {
     @include mixins.flex(flex-end);
     @include mixins.text(var(--text-primary), 14px, 600);
-    max-width: 300px;
-    min-width: 200px;
+    flex: 1;
     white-space: nowrap;
     gap: 2px;
 

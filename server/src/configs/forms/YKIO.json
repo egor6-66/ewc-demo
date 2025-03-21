@@ -61,36 +61,26 @@
           }
         },
         {
-          "type": "GROUP",
-          "name": "incoming_number_group",
+          "type": "INPUT",
+          "name": "incoming_number",
+          "displayName": "Входящий номер",
+          "required": true,
           "grid": {
             "column": "3",
             "row": "1"
+          }
+        },
+        {
+          "type": "BUTTON",
+          "name": "incoming_number",
+          "icon": "make_call",
+          "grid": {
+            "column": "4",
+            "row": "1"
           },
-          "items": [
-            {
-              "type": "INPUT",
-              "name": "incoming_number",
-              "displayName": "Входящий номер",
-              "required": true,
-              "grid": {
-                "column": "1",
-                "row": "1"
-              }
-            },
-            {
-              "type": "BUTTON",
-              "name": "incoming_number",
-              "icon": "make_call",
-              "grid": {
-                "column": "2",
-                "row": "1"
-              },
-              "style": {
-                "width": 22
-              }
-            }
-          ]
+          "style": {
+            "width": 22
+          }
         },
         {
           "type": "INPUT",
@@ -179,7 +169,50 @@
       "grid": {
         "column": "1",
         "row": "2"
-      }
+      },
+      "items": [
+        {
+          "type": "INPUT",
+          "name": "m_o",
+          "displayName": "MO",
+          "grid": {
+            "column": "1",
+            "row": "1"
+          },
+          "nameStyle": {
+            "justifyContent": "flex-start"
+          }
+        },
+        {
+          "type": "INPUT",
+          "name": "N_P",
+          "displayName": "НП",
+          "grid": {
+            "column": "2",
+            "row": "1"
+          }
+        },
+        {
+          "type": "INPUT",
+          "name": "street",
+          "displayName": "Улица",
+          "grid": {
+            "column": "3",
+            "row": "1"
+          }
+        },
+        {
+          "type": "GROUP",
+          "name": "house_group",
+          "grid": {
+            "column": "1",
+            "row": "2"
+          },
+          "items": [
+
+          ]
+        }
+      ]
     },
     {
       "type": "GROUP",
