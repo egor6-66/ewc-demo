@@ -1,7 +1,7 @@
 @use '@packages/styles/src/mixins';
 
 .wrapper {
-  @include mixins.flex(space-between, center);
+  @include mixins.flex(flex-start, center);
   @include mixins.box-size(100%, auto);
   gap: 10px;
   transition: background-color 0.25s;

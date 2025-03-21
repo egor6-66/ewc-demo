@@ -9,11 +9,11 @@ import { IProps } from './interfaces';
 import styles from './styles.module.scss';
 
 const Checkbox = forwardRef((props: IProps, ref) => {
-    const { wrapperStyles, isLoading, displayName, ...attrs } = props;
+    const { wrapperStyle, isLoading, displayName, ...attrs } = props;
     const state = useStateCustom(false);
 
     return (
-        <div className={styles.wrapper} style={wrapperStyles}>
+        <div className={styles.wrapper} style={wrapperStyle}>
             <div className={styles.checkboxWrapper} {...attrs} onClick={state.toggle}>
                 <AnimatePresence visible={state.value} className={styles.icon}>
                     <Icons icon={'select'} />

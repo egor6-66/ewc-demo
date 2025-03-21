@@ -4,6 +4,7 @@
   @include mixins.box-size(100%, 100%);
   display: grid;
   gap: 10px;
+  grid-column: auto;
 
   &_firstLvl {
   }

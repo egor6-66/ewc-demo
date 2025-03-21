@@ -8,20 +8,27 @@ import { IProps } from './interfaces';
 import styles from './styles.module.scss';
 
 const Group = (props: IProps) => {
-    const { item, control, isFirstLvl, grid, itemIndex } = props;
+    const { version, item, control, isFirstLvl, grid, itemIndex } = props;
 
-    const classes = classNames({
+    const isFirst = itemIndex === 0;
+
+    const wrapperClasses = classNames({
         [styles.wrapper]: true,
         [styles.wrapper_firstLvl]: isFirstLvl,
-        [styles.wrapper_firstElement]: itemIndex === 0,
+        [styles.wrapper_firstElement]: isFirst,
     });
 
     return (
-        <div className={classes} style={{ ...grid, ...item?.styles }}>
-            {item.displayName && <div className={styles.name}>{item.displayName}</div>}
-            <div className={styles.items}>
-                <Items control={control} items={item?.items || []} isFirstLvl={false} />
-            </div>
+        <div className={wrapperClasses} style={{ ...grid, ...item?.style }}>
+            {item.displayName && (
+                <div className={styles.header}>
+                    <div className={styles.name}>{item.displayName}</div>
+                    <div className={styles.line} />
+                    {version && isFirst && <div className={styles.version}>{version.description}</div>}
+                </div>
+            )}
+
+            <Items control={control} items={item?.items || []} isFirstLvl={false} style={item?.style} />
         </div>
     );
 };

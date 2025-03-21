@@ -1,3 +1,4 @@
+import { CSSProperties } from 'react';
 import { Control } from 'react-hook-form';
 
 export enum Types {
@@ -11,4 +12,7 @@ export interface IProps {
     items: any;
     isFirstLvl?: boolean;
     control: Control;
+    compact?: boolean;
+    style?: CSSProperties;
+    version?: any;
 }

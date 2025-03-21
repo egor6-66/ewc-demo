@@ -6,6 +6,27 @@
   background-color: var(--bg-primary);
   border-radius: 4px;
 
+  .header {
+    @include mixins.flex(space-between, center);
+    @include mixins.box-size(100%, auto);
+    margin-bottom: 12px;
+    gap: 25px;
+
+    .name {
+      @include mixins.text(var(--text-primary), 16px, 700);
+    }
+
+    .line{
+      @include mixins.box-size(auto, 1px);
+      flex: 1;
+      background-color: var(--border-bg);
+    }
+
+    .version {
+      @include mixins.text(var(--text-primary), 14px, 500);
+    }
+  }
+
   &_firstLvl {
     padding: 12px;
     gap: 4px;
@@ -14,14 +35,5 @@
   &_firstElement {
     padding: 12px;
     border-radius: 0 0 0 4px;
-  }
-
-  .name {
-    @include mixins.text(var(--text-primary), 16px, 700);
-    margin-bottom: 12px;
-  }
-
-  .items {
-    @include mixins.box-size(100%, 100%);
   }
 }

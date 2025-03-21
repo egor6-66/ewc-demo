@@ -1,16 +1,14 @@
 import React, { forwardRef } from 'react';
 import classNames from 'classnames';
 
+import Icons from '../icons';
+
 import { IProps } from './interfaces';
 
 import styles from './styles.module.scss';
 
-const defaultStyle = {
-    minWidth: 250,
-};
-
 const Input = forwardRef((props: IProps, ref) => {
-    const { id, isLoading, displayName, disabled, wrapperStyles, nameStyles = {}, ...attrs } = props;
+    const { id, required, isLoading, nameStyle, wrapperStyle, inputStyle, displayName, disabled, ...attrs } = props;
 
     const wrapperClasses = classNames({
         [styles.wrapper]: true,
@@ -21,11 +19,16 @@ const Input = forwardRef((props: IProps, ref) => {
     });
 
     return (
-        <div id={id} className={wrapperClasses} data-disabled={disabled} style={wrapperStyles}>
-            <span className={styles.name} style={{ ...nameStyles }}>
+        <div id={id} className={wrapperClasses} data-disabled={disabled} style={wrapperStyle}>
+            <span className={styles.name} style={{ ...nameStyle }}>
                 {displayName}
+                {required && (
+                    <span className={styles.requiredIcon}>
+                        <Icons icon={'required'} />
+                    </span>
+                )}
             </span>
-            <input className={inputClasses} style={defaultStyle} {...attrs} />
+            <input className={inputClasses} style={inputStyle} {...attrs} />
         </div>
     );
 });

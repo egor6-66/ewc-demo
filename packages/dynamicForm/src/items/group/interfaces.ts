@@ -7,4 +7,5 @@ export interface IProps {
     isFirstLvl?: boolean;
     grid: CSSProperties;
     itemIndex: number;
+    version?: any;
 }

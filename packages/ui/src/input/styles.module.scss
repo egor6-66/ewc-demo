@@ -11,11 +11,17 @@
   }
 
   .name {
+    @include mixins.flex(flex-end);
     @include mixins.text(var(--text-primary), 14px, 600);
-    text-align: left;
     max-width: 300px;
-    min-width: 210px;
+    min-width: 200px;
     white-space: nowrap;
+    gap: 2px;
+
+    .requiredIcon{
+      @include mixins.flex;
+      margin-top: 2px;
+    }
   }
 
   .input {

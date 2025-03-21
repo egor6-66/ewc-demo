@@ -9,7 +9,7 @@ import { IProps, Types } from './interfaces';
 import styles from './styles.module.scss';
 
 const Items = (props: IProps) => {
-    const { items, control, isFirstLvl } = props;
+    const { version, items, control, isFirstLvl, style } = props;
 
     const classes = classNames({
         [styles.wrapper]: true,
@@ -17,7 +17,7 @@ const Items = (props: IProps) => {
     });
 
     return (
-        <div className={classes}>
+        <div className={classes} style={style}>
             {items?.map((item: any, index: number) => {
                 const grid = {
                     gridColumn: item.grid?.column,
@@ -33,16 +33,7 @@ const Items = (props: IProps) => {
                                 control={control}
                                 defaultValue={item.value}
                                 render={(data) => {
-                                    return (
-                                        <Input
-                                            wrapperStyles={grid}
-                                            nameStyles={{ textAlign: item.grid?.column?.indexOf('1') > -1 ? 'left' : 'right' }}
-                                            id={item.name}
-                                            disabled={item.disabled === 'true'}
-                                            {...item}
-                                            {...data.field}
-                                        />
-                                    );
+                                    return <Input wrapperStyle={grid} id={item.name} {...item} {...data.field} />;
                                 }}
                             />
                         );
@@ -56,7 +47,7 @@ const Items = (props: IProps) => {
                                 defaultValue={item.value === 'true'}
                                 render={(data) => (
                                     <Checkbox
-                                        wrapperStyles={grid}
+                                        wrapperStyle={grid}
                                         // checked={data.field.value}
                                         // onChange={(e) => setValue(field.name, e.currentTarget.checked)}
                                         displayName={item.displayName}
@@ -67,10 +58,14 @@ const Items = (props: IProps) => {
                         );
 
                     case Types.BUTTON:
-                        return <Button key={item.name} />;
+                        return (
+                            <Button style={{ ...grid, ...item?.style }} key={item.name} iconName={item?.icon}>
+                                {item?.displayName}
+                            </Button>
+                        );
 
                     case Types.GROUP:
-                        return <Group key={item.name} item={item} control={control} grid={grid} isFirstLvl={isFirstLvl} itemIndex={index} />;
+                        return <Group key={item.name} item={item} control={control} grid={grid} isFirstLvl={isFirstLvl} itemIndex={index} version={version} />;
                 }
             })}
         </div>
