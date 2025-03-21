@@ -2,10 +2,11 @@
 
 .wrapper {
   @include mixins.box-size(100%, 100%);
+  max-width: 1448px;
   display: grid;
-  gap: 2px;
+  gap: 8px;
 
   &_firstLvl {
-
+    gap: 2px;
   }
 }

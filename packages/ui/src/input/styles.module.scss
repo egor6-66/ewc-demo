@@ -13,9 +13,9 @@
   .name {
     @include mixins.flex(flex-end);
     @include mixins.text(var(--text-primary), 14px, 600);
-    flex: 1;
     white-space: nowrap;
     gap: 2px;
+    width: 180px;
 
     .requiredIcon{
       @include mixins.flex;

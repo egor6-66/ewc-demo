@@ -8,7 +8,7 @@ import { IProps } from './interfaces';
 import styles from './styles.module.scss';
 
 const Group = (props: IProps) => {
-    const { version, item, control, isFirstLvl, grid, itemIndex } = props;
+    const { item, control, isFirstLvl, itemIndex, grid, version } = props;
 
     const isFirst = itemIndex === 0;
 
@@ -28,7 +28,7 @@ const Group = (props: IProps) => {
                 </div>
             )}
 
-            <Items control={control} items={item?.items || []} isFirstLvl={false} style={item?.style} />
+            <Items control={control} item={item} isFirstLvl={false} />
         </div>
     );
 };

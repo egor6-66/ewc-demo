@@ -9,16 +9,23 @@ import { IProps, Types } from './interfaces';
 import styles from './styles.module.scss';
 
 const Items = (props: IProps) => {
-    const { version, items, control, isFirstLvl, style } = props;
+    const { item, control, isFirstLvl } = props;
+
+    const version = item?.version;
 
     const classes = classNames({
         [styles.wrapper]: true,
         [styles.wrapper_firstLvl]: isFirstLvl,
     });
 
+    const gridTemplate = {
+        gridTemplateRows: item?.template?.rows,
+        gridTemplateColumns: item?.template?.columns,
+    };
+
     return (
-        <div className={classes} style={style}>
-            {items?.map((item: any, index: number) => {
+        <div className={classes} style={{ ...item?.style, ...gridTemplate }}>
+            {item?.items?.map((item: any, index: number) => {
                 const grid = {
                     gridColumn: item.grid?.column,
                     gridRow: item.grid?.row,

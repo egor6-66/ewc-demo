@@ -21,7 +21,7 @@ const DynamicForm = (props: IDynamicFormProps) => {
 
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
-            <Items control={control} items={config?.items || []} version={config?.version} isFirstLvl />
+            <Items control={control} item={config} isFirstLvl />
         </form>
     );
 };
