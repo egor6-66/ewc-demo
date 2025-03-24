@@ -23,15 +23,14 @@ const WorkspacePage = () => {
             <div className={styles.appState}>
                 <AppState operatorName={'112 Санкт-Петербург'} />
             </div>
-            <div className={styles.navigations}>
-                <Navigation items={navItems} />
-            </div>
-            <AnimatePresence visible={true} className={styles.content} animationKey={animationKey}>
-                <Routes location={location} key={animationKey}>
-                    <Route path="incidents/*" element={<IncidentsPage />} />
-                    <Route path="reports/*" element={<ReportsPage />} />
-                </Routes>
-            </AnimatePresence>
+            <Navigation items={navItems} className={styles.navigations}>
+                <AnimatePresence visible={true} className={styles.content} animationKey={animationKey}>
+                    <Routes location={location} key={animationKey}>
+                        <Route path="incidents/*" element={<IncidentsPage />} />
+                        <Route path="reports/*" element={<ReportsPage />} />
+                    </Routes>
+                </AnimatePresence>
+            </Navigation>
         </div>
     );
 };

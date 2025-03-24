@@ -11,8 +11,9 @@
   @include mixins.box-size(100%, 40px);
   @include mixins.flex(space-between, center);
 
-  .block{
+  .createCard{
     @include mixins.flex(flex-start, center);
+    @include mixins.text(var(--text-primary), 18px, 500);
     gap: 18px;
   }
 }

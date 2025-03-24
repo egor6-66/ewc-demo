@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { PropsWithChildren, useCallback } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useStateCustom } from '@packages/hooks';
 import classNames from 'classnames';
@@ -8,8 +8,8 @@ import { IItem, IProps } from './interfaces';
 
 import styles from './styles.module.scss';
 
-const Navigation = (props: IProps) => {
-    const { items = [] } = props;
+const Navigation = (props: PropsWithChildren<IProps>) => {
+    const { items = [], children, className } = props;
     const navigate = useNavigate();
     const location = useLocation();
 
@@ -26,7 +26,7 @@ const Navigation = (props: IProps) => {
     }, []);
 
     return (
-        <div className={styles.wrapper}>
+        <div className={classNames(styles.wrapper, className)}>
             <div className={styles.items}>
                 {items.map((item) => {
                     const isActive = location.pathname.includes(item.name);
@@ -44,6 +44,7 @@ const Navigation = (props: IProps) => {
                 })}
                 {lineData.value.width && <motion.div animate={{ width: lineData.value.width, left: lineData.value.positionX }} className={styles.line} />}
             </div>
+            {children}
         </div>
     );
 };

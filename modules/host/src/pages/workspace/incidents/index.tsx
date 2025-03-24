@@ -15,7 +15,7 @@ const IncidentsPage = () => {
     return (
         <div className={styles.wrapper}>
             <div className={styles.header}>
-                <div className={styles.block}>
+                <div className={styles.createCard}>
                     <span>Карточки происшествий</span>
                     <Button onClick={() => navigateWithParam('/card/', 'cardId', 'YKIO')}>Создать карточку</Button>
                 </div>

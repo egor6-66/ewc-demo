@@ -13,11 +13,14 @@
   }
 
   .navigations{
-
-  }
-
-  .content {
-    @include mixins.flex(center, center);
     @include mixins.box-size(100%, 100%);
+    @include mixins.flex-column(center, center);
+    gap: 12px;
+
+    .content {
+      @include mixins.flex(center, center);
+      @include mixins.box-size(100%, auto);
+      flex: 1;
+    }
   }
 }

@@ -7,6 +7,7 @@ export interface IItem {
 
 export interface IProps {
     items: Items;
+    className: string;
 }
 
 export type Items = Array<IItem>;
