@@ -1,17 +1,18 @@
 import React from 'react';
-import { Navigate, Route, Routes, useLocation } from 'react-router-dom';
-import { AppState } from '@packages/components';
+import { Navigate, Route, Routes } from 'react-router-dom';
+import { useRouting } from '@packages/hooks';
 import { AnimatePresence } from '@packages/ui';
 
+import { Card } from '@/widgets';
+
 import AuthPage from './auth';
-import CardPage from './card';
 import WorkspacePage from './workspace';
 
 import styles from './styles.module.scss';
 
 const Pages = () => {
-    const location = useLocation();
-    const animationKey = location.pathname.split('/')[1];
+    const { getSegment, location } = useRouting();
+    const animationKey = getSegment(1);
 
     return (
         <div className={styles.wrapper}>
@@ -20,7 +21,7 @@ const Pages = () => {
                     <Route path="*" element={<Navigate to={'auth'} />} />
                     <Route path="auth/*" element={<AuthPage />} />
                     <Route path="workspace/*" element={<WorkspacePage />} />
-                    <Route path="card/:cardId" element={<CardPage />} />
+                    <Route path="card/*" element={<Card />} />
                 </Routes>
             </AnimatePresence>
         </div>

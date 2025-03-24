@@ -1,6 +1,5 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useStandalone } from '@packages/hooks';
+import { useRouting, useStandalone } from '@packages/hooks';
 import { Modules } from '@packages/types';
 import { AnimatePresence, Button } from '@packages/ui';
 
@@ -9,7 +8,7 @@ import { CardPreview, CardsList, Map } from '@/widgets';
 import styles from './styles.module.scss';
 
 const IncidentsPage = () => {
-    const navigate = useNavigate();
+    const { navigateWithParam } = useRouting();
 
     const mapStandalone = useStandalone({ currentModule: Modules.HOST, targetModule: Modules.MAP });
 
@@ -18,7 +17,7 @@ const IncidentsPage = () => {
             <div className={styles.header}>
                 <div className={styles.block}>
                     <span>Карточки происшествий</span>
-                    <Button onClick={() => navigate('/card/321523525')}>Создать карточку</Button>
+                    <Button onClick={() => navigateWithParam('/card/', 'cardId', 'YKIO')}>Создать карточку</Button>
                 </div>
                 <div className={styles.block}>filters</div>
             </div>

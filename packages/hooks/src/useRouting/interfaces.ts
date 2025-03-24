@@ -1,1 +1,1 @@
-export type Params = 'cardId';
+export type Params = 'cardId' | 'reportId';

@@ -1,6 +1,7 @@
 import React from 'react';
-import { Route, Routes, useLocation } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
 import { AppState } from '@packages/components';
+import { useRouting } from '@packages/hooks';
 import { AnimatePresence, INavigation, Navigation } from '@packages/ui';
 
 import IncidentsPage from './incidents';
@@ -9,9 +10,8 @@ import ReportsPage from './reports';
 import styles from './styles.module.scss';
 
 const WorkspacePage = () => {
-    const location = useLocation();
-
-    const currentPathSegment = location.pathname.split('/')[2];
+    const { getSegment, location } = useRouting();
+    const animationKey = getSegment(2);
 
     const navItems: INavigation.Items = [
         { name: 'incidents', displayName: 'ПРОИСШЕСТВИЯ' },
@@ -24,10 +24,10 @@ const WorkspacePage = () => {
                 <AppState operatorName={'112 Санкт-Петербург'} />
             </div>
             <div className={styles.navigations}>
-                <Navigation id={'WorkspacePage'} items={navItems} />
+                <Navigation items={navItems} />
             </div>
-            <AnimatePresence visible={true} className={styles.content} animationKey={currentPathSegment}>
-                <Routes location={location} key={currentPathSegment}>
+            <AnimatePresence visible={true} className={styles.content} animationKey={animationKey}>
+                <Routes location={location} key={animationKey}>
                     <Route path="incidents/*" element={<IncidentsPage />} />
                     <Route path="reports/*" element={<ReportsPage />} />
                 </Routes>

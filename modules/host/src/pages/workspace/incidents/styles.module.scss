@@ -12,7 +12,7 @@
   @include mixins.flex(space-between, center);
 
   .block{
-    @include mixins.flex;
+    @include mixins.flex(flex-start, center);
     gap: 18px;
   }
 }

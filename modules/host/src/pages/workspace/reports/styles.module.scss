@@ -5,14 +5,21 @@
   @include mixins.flex-column(center, center);
   gap: 12px;
 
-  .navigations {
+
+  .tabs{
+    @include mixins.box-size(100%, 100%);
+    @include mixins.flex-column;
   }
 
-  .content {
-    @include mixins.box-size(100%, auto);
-    @include mixins.flex;
-    border-radius: 12px;
+  .reportsContainer{
+    @include mixins.box-size(100%, 100%);
+    @include mixins.flex-column;
     background-color: var(--bg-primary);
-    flex: 1;
+    border-radius: 0 0 12px 12px;
+
+    .main{
+      @include mixins.box-size(100%, 100%);
+      flex: 1;
+    }
   }
 }

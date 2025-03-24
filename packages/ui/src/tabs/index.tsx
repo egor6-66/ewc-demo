@@ -1,4 +1,4 @@
-import React, { PropsWithChildren } from 'react';
+import React, { PropsWithChildren, useEffect } from 'react';
 import classNames from 'classnames';
 
 import { IItem, IProps } from './interfaces';
@@ -6,12 +6,16 @@ import { IItem, IProps } from './interfaces';
 import styles from './styles.module.scss';
 
 const Tabs = (props: PropsWithChildren<IProps>) => {
-    const { items, activeItem, children, className, handleTabClick } = props;
+    const { onMount, items, activeItem, children, className, handleTabClick } = props;
 
     const tabClick = (item: IItem) => {
         item.onClick && item.onClick(item);
         handleTabClick && handleTabClick(item);
     };
+
+    useEffect(() => {
+        onMount && onMount();
+    }, []);
 
     return (
         <div className={classNames(styles.wrapper, className)}>

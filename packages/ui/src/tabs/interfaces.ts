@@ -12,6 +12,7 @@ export interface IProps {
     items: Items;
     activeItem: string;
     handleTabClick?: (item: TabWithOutCallback) => void;
+    onMount?: () => void;
     className: string;
 }
 

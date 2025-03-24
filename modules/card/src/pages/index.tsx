@@ -27,16 +27,11 @@ const Pages = () => {
             <div className={styles.tab} onClick={() => navigate(`/workspace/incidents`)}>
                 BACk
             </div>
-            <Tabs
-                items={tebItems}
-                activeItem={params.cardId}
-                handleTabClick={(item) => navigateWithParam('/card/', 'cardId', item.name)}
-                className={styles.tabs}
-            >
+            <Tabs items={tebItems} activeItem={params.cardId} handleTabClick={(item) => navigateWithParam('', 'cardId', item.name)} className={styles.tabs}>
                 <div className={styles.cardContainer}>
                     <AnimatePresence className={styles.main} animationKey={params.cardId} visible={true}>
                         <Routes location={location} key={params.cardId}>
-                            <Route path="card/cardId/:id" element={<CardPage />} />
+                            <Route path="cardId/:id" element={<CardPage />} />
                         </Routes>
                     </AnimatePresence>
                 </div>

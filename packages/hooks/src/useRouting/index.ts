@@ -2,10 +2,6 @@ import { useLocation, useNavigate } from 'react-router-dom';
 
 import { Params } from './interfaces';
 
-const params: Record<Params, string> = {
-    cardId: '',
-};
-
 function useRouting() {
     const navigate = useNavigate();
     const location = useLocation();
@@ -15,6 +11,11 @@ function useRouting() {
     };
 
     const getParams = (): Record<Params, string> => {
+        const params: Record<Params, string> = {
+            cardId: '',
+            reportId: '',
+        };
+
         const pathArr = location.pathname.split('/') as Array<Params>;
 
         return pathArr.reduce((acc, segment, index) => {
@@ -26,7 +27,11 @@ function useRouting() {
         }, params);
     };
 
-    return { navigate, navigateWithParam, location, getParams };
+    const getSegment = (index: number) => {
+        return location.pathname.split('/')[index];
+    };
+
+    return { navigate, navigateWithParam, location, getParams, getSegment };
 }
 
 export default useRouting;

@@ -6,7 +6,6 @@ export interface IItem {
 }
 
 export interface IProps {
-    id: string;
     items: Items;
 }
 
