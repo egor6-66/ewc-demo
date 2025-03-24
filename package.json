@@ -2,11 +2,11 @@
   "name": "112",
   "version": "1.0.0",
   "scripts": {
-    "demo-stand:dev": "ts-node  ./scripts/demo-stand.ts --mode=dev",
-    "demo-stand:prod": "ts-node  ./scripts/demo-stand.ts --mode=prod",
+    "demo-stand:dev": "ts-node ./scripts/demo-stand.ts --mode=dev",
+    "demo-stand:prod": "ts-node ./scripts/demo-stand.ts --mode=prod",
     "dynamic-build": "ts-node  scripts/dynamic-build.ts --mode=dev",
-    "docker": "docker compose -f docker-compose.yml  up -d",
-    "docker:watcher": "docker compose -f docker-compose.watcher.yml  up --watch --build"
+    "docker": "docker compose -f docker-compose.yml up --build -d",
+    "docker:watcher": "docker compose -f docker-compose.watcher.yml up --watch --build"
   },
   "workspaces": [
     "modules/*",

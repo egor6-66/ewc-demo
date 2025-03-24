@@ -2,7 +2,6 @@
 
 .wrapper {
   @include mixins.box-size(100%, 100%);
-  @include mixins.text(var(--text-primary), 14px);
   @include mixins.flex-column();
   padding: 12px;
   position: relative;

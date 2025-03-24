@@ -2,10 +2,9 @@
 
 .wrapper {
   @include mixins.box-size(100%, 100%);
-  @include mixins.text(var(--text-primary), 14px);
   padding: 12px;
 
-  .main{
+  .main {
     @include mixins.box-size(100%, 100%);
     flex: 1;
   }

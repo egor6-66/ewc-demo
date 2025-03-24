@@ -17,11 +17,11 @@
     gap: 12px;
 
     .name {
-
+      @include mixins.text(var(--text-primary), 18px, 700);
     }
 
     .description {
-
+      @include mixins.text(var(--text-primary), 14px, 500);
     }
   }
 }
