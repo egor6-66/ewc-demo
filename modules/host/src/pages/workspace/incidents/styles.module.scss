@@ -7,35 +7,24 @@
   background-color: var(--bg-substrate);
   position: relative;
 
-.header{
-  @include mixins.box-size(100%, 40px);
-  @include mixins.flex(space-between, center);
+  .header {
+    @include mixins.box-size(100%, 40px);
+    @include mixins.flex(space-between, center);
 
-  .createCard{
-    @include mixins.flex(flex-start, center);
-    @include mixins.text(var(--text-primary), 18px, 500);
-    gap: 18px;
-  }
-}
-
-  .cardGroup {
-    @include mixins.flex(center, center);
-    width: 100%;
-    flex: 1;
-    gap: 12px;
-    min-height: 70%;
-
-    .cardList {
-      @include mixins.box-size(80%, 100%);
-    }
-
-    .cardPreview {
-      @include mixins.box-size(20%, 100%);
-      min-width: 350px;
+    .createCard {
+      @include mixins.flex(flex-start, center);
+      @include mixins.text(var(--text-primary), 18px, 500);
+      gap: 18px;
     }
   }
 
-  .map {
-    @include mixins.box-size(100%, 30%);
+  .gridContainer{
+    @include mixins.box-size(100%, 100%);
+    overflow: auto;
+    .grid {
+      @include mixins.box-size(100%, 100%);
+      overflow: auto;
+    }
   }
+
 }
